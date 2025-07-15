@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://hunrotation.github.io/al-folio/sitemap.xml
+Sitemap: https://hunrotation.github.io/sitemap.xml
