@@ -23,7 +23,7 @@ announcements:
 #  enabled: true
 #  scrollable: true # adds a vertical scroll bar if there are more #than 3 new posts items
 #  limit: 3 # leave blank to include all the blog posts
-#---
+---
 
 I am a Master's student at KAIST's **[Music and Audio Computing Lab](https://mac.kaist.ac.kr/)**, where I am fortunate to be advised by **Prof. Juhan Nam**. My research is dedicated to bridging the gap between machines and music.
 
