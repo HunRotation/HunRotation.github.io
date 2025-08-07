@@ -30,4 +30,3 @@ I am a Master's student at KAIST's **[Music and Audio Computing Lab](https://mac
 My focus lies in two core areas:
 
 Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
-
