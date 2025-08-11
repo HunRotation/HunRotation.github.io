@@ -29,4 +29,8 @@ I am a Master's student at KAIST's **[Music and Audio Computing Lab](https://mac
 
 My focus lies in two core areas:
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+- **Music Understanding with Large Language Models**: Developing methods for LLMs to comprehend the structural, semantic, and emotional content of music.
+
+- **Emotional Expression in Music Generation**: Improving the emotional expressiveness of music generation systems to better align with human perception.
+
+My ultimate aim is to develop artificial intelligence that 'understands' music in a manner analogous to human perception, enabling systems that can effectively assist people with a wide range of music-related tasks, from composition and analysis to discovery and education.
