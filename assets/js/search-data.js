@@ -79,11 +79,25 @@ ninja.data = [{
           section: "Projects",handler: () => {
               window.location.href = "/projects/9_project.html";
             },},{
+        id: 'social-phone',
+        title: 'Phone',
+        section: 'Socials',
+        handler: () => {
+          window.open("", "_blank");
+        },
+      },{
+        id: 'social-address',
+        title: 'Address',
+        section: 'Socials',
+        handler: () => {
+          window.open("", "_blank");
+        },
+      },{
         id: 'social-email',
         title: 'email',
         section: 'Socials',
         handler: () => {
-          window.open("mailto:%68%75%6E%79%38%37%30%38@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+          window.open("mailto:%72%6F%74%61%74%69%6F%6E@%6B%61%69%73%74.%61%63.%6B%72", "_blank");
         },
       },{
         id: 'social-github',
@@ -97,7 +111,7 @@ ninja.data = [{
         title: 'LinkedIn',
         section: 'Socials',
         handler: () => {
-          window.open("https://www.linkedin.com/in/Gyehun Go", "_blank");
+          window.open("https://www.linkedin.com/in/gyehun-go-5b190b353", "_blank");
         },
       },{
       id: 'light-theme',
