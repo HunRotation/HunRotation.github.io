@@ -248,8 +248,6 @@
         {% else %}
           <a href="{{ entry.code | relative_url }}" class="btn btn-sm z-depth-0" role="button">Code</a>
         {% endif %}
-      {% else %}
-        <a class="btn btn-sm z-depth-0 disabled" role="button">Code</a>
       {% endif %}
       {% if entry.demo and entry.demo != "" %}
         {% if entry.demo contains '://' %}
