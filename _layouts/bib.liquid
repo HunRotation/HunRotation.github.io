@@ -204,6 +204,15 @@
       {% if entry.bibtex_show %}
         <a class="bibtex btn btn-sm z-depth-0" role="button">Bib</a>
       {% endif %}
+      {% if entry.paper and entry.paper != "" %}
+        {% if entry.paper contains '://' %}
+          <a href="{{ entry.paper }}" class="btn btn-sm z-depth-0" role="button">Paper</a>
+        {% else %}
+          <a href="{{ entry.paper | relative_url }}" class="btn btn-sm z-depth-0" role="button">Paper</a>
+        {% endif %}
+      {% else %}
+        <a class="btn btn-sm z-depth-0 disabled" role="button">Paper</a>
+      {% endif %}
       {% if entry.html %}
         {% if entry.html contains '://' %}
           <a href="{{ entry.html }}" class="btn btn-sm z-depth-0" role="button">HTML</a>
@@ -233,8 +242,23 @@
       {% if entry.blog %}
         <a href="{{ entry.blog }}" class="btn btn-sm z-depth-0" role="button">Blog</a>
       {% endif %}
-      {% if entry.code %}
-        <a href="{{ entry.code }}" class="btn btn-sm z-depth-0" role="button">Code</a>
+      {% if entry.code and entry.code != "" %}
+        {% if entry.code contains '://' %}
+          <a href="{{ entry.code }}" class="btn btn-sm z-depth-0" role="button">Code</a>
+        {% else %}
+          <a href="{{ entry.code | relative_url }}" class="btn btn-sm z-depth-0" role="button">Code</a>
+        {% endif %}
+      {% else %}
+        <a class="btn btn-sm z-depth-0 disabled" role="button">Code</a>
+      {% endif %}
+      {% if entry.demo and entry.demo != "" %}
+        {% if entry.demo contains '://' %}
+          <a href="{{ entry.demo }}" class="btn btn-sm z-depth-0" role="button">Demo</a>
+        {% else %}
+          <a href="{{ entry.demo | relative_url }}" class="btn btn-sm z-depth-0" role="button">Demo</a>
+        {% endif %}
+      {% else %}
+        <a class="btn btn-sm z-depth-0 disabled" role="button">Demo</a>
       {% endif %}
       {% if entry.poster %}
         {% if entry.poster contains '://' %}
