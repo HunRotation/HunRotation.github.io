@@ -11,7 +11,25 @@ layout: default
         {{ site.title }}
       {% endif %}
     </h1>
-    <p class="desc">{{ page.subtitle }}</p>
+    <div class="contact-info" style="margin-bottom: 1rem;">
+      {% if site.data.socials.address %}
+        <p style="margin-bottom: 0.5rem;"><i class="fa-solid fa-location-dot" style="margin-right: 0.5rem;"></i>{{ site.data.socials.address }}</p>
+      {% endif %}
+      {% if site.data.socials.phone %}
+        <p style="margin-bottom: 0.5rem;"><i class="fa-solid fa-phone" style="margin-right: 0.5rem;"></i>{{ site.data.socials.phone }}</p>
+      {% endif %}
+      {% if site.data.socials.email %}
+        <p style="margin-bottom: 0.5rem;"><i class="fa-solid fa-envelope" style="margin-right: 0.5rem;"></i><a href="mailto:{{ site.data.socials.email }}">{{ site.data.socials.email }}</a></p>
+      {% endif %}
+    </div>
+    <div class="social-icons">
+      {% if site.data.socials.github_username %}
+        <a href="https://github.com/{{ site.data.socials.github_username }}" title="GitHub" style="margin-right: 0.5rem;"><i class="fa-brands fa-github fa-2x"></i></a>
+      {% endif %}
+      {% if site.data.socials.linkedin_username %}
+        <a href="https://www.linkedin.com/in/{{ site.data.socials.linkedin_username }}" title="LinkedIn"><i class="fa-brands fa-linkedin fa-2x"></i></a>
+      {% endif %}
+    </div>
   </header>
 
   <article>
