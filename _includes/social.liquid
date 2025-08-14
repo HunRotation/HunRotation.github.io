@@ -108,8 +108,3 @@
       </a>
   {% endcase %}
 {% endfor %}
-<div class="contact-info">
-  <p><i class="fa-solid fa-location-dot"></i>  {{ site.data.socials.address | default: "Your Address" }}</p>
-  <p><i class="fa-solid fa-phone"></i>  {{ site.data.socials.phone | default: "Your Phone Number" }}</p>
-  {% if site.data.socials.email %}<p><i class="fa-solid fa-envelope"></i>  <a href="mailto:{{ site.data.socials.email }}">{{ site.data.socials.email }}</a></p>{% endif %}
-</div>
