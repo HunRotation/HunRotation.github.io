@@ -4,27 +4,12 @@ layout: default
 <div class="post">
   <header class="post-header">
     <h1 class="post-title">
-     <div style="display: flex; align-items: center;">
-        {% if site.title == 'blank' %}
-          {{ site.first_name }}
-          {{ site.middle_name }}
-          <span class="font-weight-bold">{{ site.last_name }}</span>
-        {% else %}
-          {{ site.title }}
-        {% endif %}
-        {% if page.profile and page.profile.image %}
-          {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
-          {% if page.profile.image_circular %}
-            {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle' %}
-          {% else %}
-            {% assign profile_image_class = 'img-fluid z-depth-1 rounded' %}
-          {% endif %}
-          {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.10}}px, (min-width: 576px)
-          15vw, 45vw"{% endcapture %}
-          {% include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image style="margin-left: 1rem;" cache_bust=true %}
-        {% endif %}
-      </div>
-
+      {% if site.title == 'blank' %}
+        {{ site.first_name }}
+        {{ site.middle_name }}
+        <span class="font-weight-bold">{{ site.last_name }}</span>
+      {% else %}
+        {{ site.title }}
       {% endif %}
     </h1>
     <div class="contact-info" style="margin-bottom: 1rem;">
@@ -42,26 +27,6 @@ layout: default
       {% endif %}
     </div>
     <div class="social-icons" style="margin-bottom: 2rem;">
-
-  </header>
-
-  <article>
-
-    <div class="clearfix">{{ content }}</div>
-
-    <!-- News -->
-    {% if page.announcements and page.announcements.enabled %}
-
-      {% include news.liquid limit=true %}
-    {% endif %}
-
-    <!-- Latest posts -->
-    {% if page.latest_posts and page.latest_posts.enabled %}
-
-      {% include latest_posts.liquid %}
-    {% endif %}
-
-
       {% if site.data.socials.github_username %}
         <a href="https://github.com/{{ site.data.socials.github_username }}" title="GitHub" style="margin-right: 0.5rem;"
           ><i class="fa-brands fa-github fa-2x" style="color: white;"></i
@@ -74,6 +39,45 @@ layout: default
       {% endif %}
     </div>
   </header>
+
+  <article>
+    {% if page.profile %}
+      <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
+        {% if page.profile.image %}
+          {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
+          {% if page.profile.image_circular %}
+            {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle' %}
+          {% else %}
+            {% assign profile_image_class = 'img-fluid z-depth-1
+      rounded' %}
+          {% endif %}
+          {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.10}}px, (min-width: 576px)
+      15vw, 45vw"{% endcapture %}
+          {%
+            include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
+            cache_bust=true
+          %}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="clearfix">{{ content }}</div>
+
+    <!-- News -->
+    {% if page.announcements and page.announcements.enabled %}
+      <h2>
+        <a href="{{ '/news/' | relative_url }}" style="color: inherit">news</a>
+      </h2>
+      {% include news.liquid limit=true %}
+    {% endif %}
+
+    <!-- Latest posts -->
+    {% if page.latest_posts and page.latest_posts.enabled %}
+      <h2>
+        <a href="{{ '/blog/' | relative_url }}" style="color: inherit">latest posts</a>
+      </h2>
+      {% include latest_posts.liquid %}
+    {% endif %}
 
     <!-- Selected papers -->
     {% if page.selected_papers %}
