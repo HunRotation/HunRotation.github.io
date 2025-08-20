@@ -1,3 +1,4 @@
+# yaml-language-server: disable
 - title: General Information
   type: map
   contents:
@@ -11,22 +12,18 @@
 - title: Education
   type: time_table
   contents:
-    - title: B.S.
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1905
+    - title: M.S. in Culture Technology
+      institution: Korea Advanced Institute of Science and Technology (KAIST), Daejeon, South Korea
+      year: 2024 - Present
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Federal teaching diploma
-      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-      year: 1900
+        - Advised by Prof. Juhan Nam
+        - Music and Audio Computing Lab
+    - title: B.S. in Computer Science and Engineering
+      institution: Seoul National University (SNU), Seoul, South Korea
+      year: 2021 - 2025
       description:
-        - Description 1.
-        - Description 2.
+        - Graduated Summa Cum Laude
+        - Double Major in Statistics
 
 - title: Experience
   type: time_table
