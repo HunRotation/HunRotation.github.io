@@ -21,6 +21,16 @@
       "startDate": "2025-09-01",
       "endDate": "",
       "courses": ["Advisor: Juhan Nam"]
+    },
+    {
+      "institution": "Seoul National University (SNU)",
+      "location": "Seoul, South Korea",
+      "url": "https://www.snu.ac.kr/",
+      "studyType": "B.S. in Computer Science and Engineering",
+      "startDate": "2021-03-02",
+      "endDate": "2025-08-31",
+      "score": "3.90/4.3",
+      "courses": ["Double Major in Statistics"]
     }
   ],
   "awards": [
@@ -101,28 +111,41 @@
   ],
   "skills": [
     {
-      "name": "Physics",
+      "name": "Programming Languages",
       "level": "Master",
-      "icon": "fa-solid fa-hashtag",
+      "icon": "fa-solid fa-desktop",
       "keywords": [
-        "Quantum Mechanics",
-        "Quantum Computing",
-        "Quantum Information",
-        "Quantum Cryptography",
-        "Quantum Communication",
-        "Quantum Teleportation"
+        "Python",
+        "C",
+        "C++",
+        "Java",
+        "R"
+      ]
+    },
+    {
+      "name": "Deep Learning",
+      "level": "Master",
+      "icon": "fa-solid fa-bolt",
+      "keywords": [
+        "PyTorch",
+        "TensorFlow"
       ]
     }
   ],
   "languages": [
     {
-      "language": "German",
+      "language": "Korean",
       "fluency": "Native speaker",
       "icon": ""
     },
     {
       "language": "English",
       "fluency": "Fluent",
+      "icon": ""
+    },
+    {
+      "language": "Japanese",
+      "fluency": "Intermediate",
       "icon": ""
     }
   ],
