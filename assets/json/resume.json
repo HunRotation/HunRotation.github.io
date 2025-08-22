@@ -49,7 +49,7 @@
       "name": "Department of Mathematics, UCLA",
       "summary": "Research Intern<br>Advisor: Hyunsik Chae, Prof. Ernest Ryu",
       "highlights": [
-        "Developed <strong>AVSBench</strong>, a benchmark for evaluating visual understanding ability of visual language models(VLMs) by decomposing it into atomic visual skills. Found that VLMs struggle with most of these atomic visual skills that are obvious to humans."],
+        "Developed <strong>AVSBench</strong> (Atomic Visual Skills Benchmark), a benchmark for evaluating visual understanding ability of visual language models(VLMs) by decomposing it into atomic visual skills. Found that VLMs struggle with most of these atomic visual skills that are obvious to humans."],
       "startDate": "2024-06-26",
       "endDate": "2025-01-01",
       "url": "https://ernestryu.com/"
@@ -67,7 +67,7 @@
       "name": "Human-Computer Interaction Lab, Seoul National University",
       "summary": "UROP(Undergraduate Research Opportunities Program) Student<br>Advisor: Hyeon Jeon, Prof. Jinwook Seo",
       "highlights": [
-        "Developed <strong>UMATO</strong>, a novel dimension reduction algorithm for data visualization and evaluated its scalability."],
+        "Developed <strong>UMATO</strong> (Uniform Manifold Approximation with Two-phase Optimization), a novel dimension reduction algorithm for data visualization and evaluated its scalability."],
       "startDate": "2023-01-01",
       "endDate": "2023-06-30",
       "url": "https://hcil.snu.ac.kr/"
@@ -95,11 +95,20 @@
   ],
   "awards": [
     {
-      "title": "Nobel Prize in Physics",
-      "date": "1921-11-01",
-      "awarder": "Royal Swedish Academy of Sciences",
-      "url": "https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/",
-      "summary": "The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'"
+      "title": "Best Poster Award",
+      "date": "2025-02-20",
+      "awarder": "Korean Society for Music Perception and Cognition (KSMPC)",
+      "summary": "Title: Can Emotion Concepts be Reflected Well in Text-to-Music Generation Models?"
+    },
+    {
+      "title": "Seoul National University Semiconductor Specialization School Semiconductor Track Program",
+      "date": "2023-10-10",
+      "awarder": "Korea Institute for Advancement of Technology (KIAT)"
+    },
+    {
+      "title": "Hanseong Nobel Scholarship",
+      "date": "2019-03-02",
+      "awarder": "Hanseong Sonjaehan Scholarship Foundation"
     }
   ],
   "skills": [
