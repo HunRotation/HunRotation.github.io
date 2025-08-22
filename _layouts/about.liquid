@@ -1,6 +1,29 @@
 ---
 layout: default
 ---
+<style>
+  .research-interests {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .hashtag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: inline-block;
+    /* Light mode styles */
+    background-color: #343a40; /* Dark background */
+    color: #f8f9fa; /* Bright text */
+  }
+  /* Dark mode styles */
+  html.dark .hashtag {
+    background-color: #e9ecef; /* Bright gray background */
+    color: #212529; /* Dark text */
+  }
+</style>
 <div class="post">
   {% if page.profile %}
     <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
@@ -56,6 +79,13 @@ layout: default
         <a href="https://www.linkedin.com/in/{{ site.data.socials.linkedin_username }}" title="LinkedIn"
           ><i class="fa-brands fa-linkedin fa-2x" style="color: white;"></i
         ></a>
+      {% endif %}
+    </div>
+    <div class="research-interests">
+      {% if site.research_interests %}
+        {% for interest in site.research_interests %}
+          <span class="hashtag"># {{ interest }}</span>
+        {% endfor %}
       {% endif %}
     </div>
   </header>
