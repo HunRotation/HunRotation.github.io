@@ -38,8 +38,9 @@
   "research experience": [
     {
       "name": "Music and Audio Computing Lab, KAIST",
-      "summary": "Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.",
-      "highlights": ["Quantum Teleportation", "Quantum Cryptography"],
+      "summary": "Research Intern \nAdvisor: Eunjin Choi, Prof. Juhan Nam",
+      "highlights": [
+        "Developed <strong>AImoclips</strong>, a comprehensive benchmark for evaluating how well text-to-music (TTM) generation systems convey intended emotions to human listeners. The benchmark offers valuable insights into model-specific emotion rendering characteristics and supports future development of emotionally aligned TTM systems."],
       "startDate": "2025-03-01",
       "endDate": "2025-08-31",
       "url": "https://mac.kaist.ac.kr/"
