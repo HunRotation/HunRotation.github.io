@@ -96,18 +96,18 @@
   "awards": [
     {
       "title": "Best Poster Award",
-      "date": "2025-02-20",
+      "date": "2025-02",
       "awarder": "Korean Society for Music Perception and Cognition (KSMPC)",
       "summary": "Title: Can Emotion Concepts be Reflected Well in Text-to-Music Generation Models?"
     },
     {
       "title": "Seoul National University Semiconductor Specialization School Semiconductor Track Program",
-      "date": "2023-10-10",
+      "date": "2023-10",
       "awarder": "Korea Institute for Advancement of Technology (KIAT)"
     },
     {
       "title": "Hanseong Nobel Scholarship",
-      "date": "2019-03-02",
+      "date": "2019-03",
       "awarder": "Hanseong Sonjaehan Scholarship Foundation"
     }
   ],
