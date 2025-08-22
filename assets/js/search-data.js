@@ -16,6 +16,13 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/publications/";
           },
+        },{id: "nav-aimoclips-a-benchmark-for-evaluating-emotion-conveyance-in-text-to-music-generation",
+          title: "AImoclips: A Benchmark for Evaluating Emotion Conveyance in Text-to-Music Generation",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/aimoclips/";
+          },
         },{id: "nav-cv",
           title: "cv",
           description: "",
