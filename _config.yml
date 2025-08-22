@@ -623,15 +623,10 @@ jekyll_get_json:
     json: assets/json/resume.json # it can also be an url
 
 jsonresume:
-  - basics
-  - work
+  - basics # turn on/off the section by adding/removing the name from this list
   - education
-  - publications
-  - projects
-  - volunteer
+  - research experience
+  - additional experience
   - awards
-  - certificates
   - skills
   - languages
-  - interests
-  - references

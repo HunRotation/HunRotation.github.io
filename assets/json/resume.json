@@ -37,12 +37,12 @@
   ],
   "research experience": [
     {
-      "name": "Quantum Computing",
+      "name": "Music and Audio Computing Lab, KAIST",
       "summary": "Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.",
       "highlights": ["Quantum Teleportation", "Quantum Cryptography"],
-      "startDate": "2018-01-01",
-      "endDate": "2018-01-01",
-      "url": "https://example.com"
+      "startDate": "2025-03-01",
+      "endDate": "2025-08-31",
+      "url": "https://mac.kaist.ac.kr/"
     }
   ],
   "additional experience": [
