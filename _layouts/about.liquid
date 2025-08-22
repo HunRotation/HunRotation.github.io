@@ -15,13 +15,13 @@ layout: default
     font-weight: bold;
     display: inline-block;
     /* Light mode styles */
-    background-color: #343a40; /* Dark background */
-    color: #f8f9fa; /* Bright text */
+    background-color: #e9ecef; /* Bright gray background */
+    color: #212529; /* Dark text */
   }
   /* Dark mode styles */
   html.dark .hashtag {
-    background-color: #e9ecef; /* Bright gray background */
-    color: #212529; /* Dark text */
+    background-color: #343a40; /* Dark background */
+    color: #f8f9fa; /* Bright text */
   }
 </style>
 <div class="post">
@@ -72,12 +72,12 @@ layout: default
     <div class="social-icons" style="margin-bottom: 2rem;">
       {% if site.data.socials.github_username %}
         <a href="https://github.com/{{ site.data.socials.github_username }}" title="GitHub" style="margin-right: 0.5rem;"
-          ><i class="fa-brands fa-github fa-2x" style="color: white;"></i
+          ><i class="fa-brands fa-github fa-2x"></i
         ></a>
       {% endif %}
       {% if site.data.socials.linkedin_username %}
         <a href="https://www.linkedin.com/in/{{ site.data.socials.linkedin_username }}" title="LinkedIn"
-          ><i class="fa-brands fa-linkedin fa-2x" style="color: white;"></i
+          ><i class="fa-brands fa-linkedin fa-2x"></i
         ></a>
       {% endif %}
     </div>
