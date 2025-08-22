@@ -38,12 +38,30 @@
   "research experience": [
     {
       "name": "Music and Audio Computing Lab, KAIST",
-      "summary": "Research Intern \nAdvisor: Eunjin Choi, Prof. Juhan Nam",
+      "summary": "Research Intern<br>Advisor: Eunjin Choi, Prof. Juhan Nam",
       "highlights": [
         "Developed <strong>AImoclips</strong>, a comprehensive benchmark for evaluating how well text-to-music (TTM) generation systems convey intended emotions to human listeners. The benchmark offers valuable insights into model-specific emotion rendering characteristics and supports future development of emotionally aligned TTM systems."],
       "startDate": "2025-03-01",
       "endDate": "2025-08-31",
       "url": "https://mac.kaist.ac.kr/"
+    },
+    {
+      "name": "Department of Mathematics, UCLA",
+      "summary": "Research Intern<br>Advisor: Hyunsik Chae, Prof. Ernest Ryu",
+      "highlights": [
+        "Developed <strong>AVSBench</strong>, a benchmark for evaluating visual understanding ability of visual language models(VLMs) by decomposing it into atomic visual skills. Found that VLMs struggle with most of these atomic visual skills that are obvious to humans."],
+      "startDate": "2024-06-26",
+      "endDate": "2025-01-01",
+      "url": "https://ernestryu.com/"
+    },
+    {
+      "name": "Music and Audio Research Group, Seoul National University",
+      "summary": "Research Intern<br>Prof. Kyogu Lee",
+      "highlights": [
+        "Implemented and tested <strong>Theme Transformer</strong>, a Transformer-based music generation framework conditioned on a small, thematic musical piece"],
+      "startDate": "2023-07-01",
+      "endDate": "2023-08-31",
+      "url": "https://marg.snu.ac.kr/"
     }
   ],
   "additional experience": [
