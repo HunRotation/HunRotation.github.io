@@ -1,9 +1,10 @@
 ---
-layout: page
-permalink: /aimoclips/
+layout: project
 title: "AImoclips: A Benchmark for Evaluating Emotion Conveyance in Text-to-Music Generation"
-nav: true
-nav_order: 3
+description: A comprehensive benchmark for evaluating how well text-to-music (TTM) generation systems convey intended emotions to human listeners.
+img: assets/img/aimoclips.jpg # Add a preview image to this path
+importance: 1
+category: work
 ---
 
 ## Abstract
