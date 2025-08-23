@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-My first paper AImoclips is accepted to HCMIR25! 
+My first paper AImoclips is accepted to HCMIR25!

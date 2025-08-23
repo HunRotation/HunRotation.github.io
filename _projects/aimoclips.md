@@ -20,7 +20,7 @@ Recent advances in text-to-music (TTM) generation have enabled controllable and 
 
 ## Sample Questionnaire
 
-*This section is a placeholder for the sample questionnaire used in your study.*
+_This section is a placeholder for the sample questionnaire used in your study._
 
 ---
 
