@@ -21,6 +21,23 @@
           </h6>
           <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem">{{ content.publisher }}</h6>
           <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem; font-style: italic">{{ content.summary }}</h6>
+          <div class="links ml-1 ml-md-4">
+            {% if content.paper %}
+              <a href="{{ content.paper }}" class="btn z-depth-0" role="button" target="_blank" rel="noopener noreferrer"
+                ><i class="fa-solid fa-file-lines" style="margin-right: 0.5rem;"></i>Paper</a
+              >
+            {% endif %}
+            {% if content.code %}
+              <a href="{{ content.code }}" class="btn z-depth-0" role="button" target="_blank" rel="noopener noreferrer"
+                ><i class="fa-brands fa-github" style="margin-right: 0.5rem;"></i>Code</a
+              >
+            {% endif %}
+            {% if content.demo %}
+              <a href="{{ content.demo }}" class="btn z-depth-0" role="button" target="_blank" rel="noopener noreferrer"
+                ><i class="fa-solid fa-play-circle" style="margin-right: 0.5rem;"></i>Demo</a
+              >
+            {% endif %}
+          </div>
         </div>
       </div>
     </li>
