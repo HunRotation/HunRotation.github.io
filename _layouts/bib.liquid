@@ -1,5 +1,11 @@
 ---
 ---
+<style>
+  .links .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+</style>
 <div class="row">
   {% if site.enable_publication_thumbnails %}
     <div class="col col-sm-2 abbr">
@@ -204,11 +210,15 @@
       {% if entry.bibtex_show %}
         <a class="bibtex btn btn-sm z-depth-0" role="button">Bib</a>
       {% endif %}
-      {% if entry.paper and entry.paper != "" %}
+      {% if entry.paper and entry.paper != '' %}
         {% if entry.paper contains '://' %}
-          <a href="{{ entry.paper }}" class="btn btn-sm z-depth-0" role="button">Paper</a>
+          <a href="{{ entry.paper }}" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener noreferrer"
+            ><i class="fa-solid fa-file-lines" style="margin-right: 0.5rem;"></i>Paper</a
+          >
         {% else %}
-          <a href="{{ entry.paper | relative_url }}" class="btn btn-sm z-depth-0" role="button">Paper</a>
+          <a href="{{ entry.paper | relative_url }}" class="btn btn-sm z-depth-0" role="button"
+            ><i class="fa-solid fa-file-lines" style="margin-right: 0.5rem;"></i>Paper</a
+          >
         {% endif %}
       {% else %}
         <a class="btn btn-sm z-depth-0 disabled" role="button">Paper</a>
@@ -242,18 +252,26 @@
       {% if entry.blog %}
         <a href="{{ entry.blog }}" class="btn btn-sm z-depth-0" role="button">Blog</a>
       {% endif %}
-      {% if entry.code and entry.code != "" %}
+      {% if entry.code and entry.code != '' %}
         {% if entry.code contains '://' %}
-          <a href="{{ entry.code }}" class="btn btn-sm z-depth-0" role="button">Code</a>
+          <a href="{{ entry.code }}" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener noreferrer"
+            ><i class="fa-brands fa-github" style="margin-right: 0.5rem;"></i>Code</a
+          >
         {% else %}
-          <a href="{{ entry.code | relative_url }}" class="btn btn-sm z-depth-0" role="button">Code</a>
+          <a href="{{ entry.code | relative_url }}" class="btn btn-sm z-depth-0" role="button"
+            ><i class="fa-brands fa-github" style="margin-right: 0.5rem;"></i>Code</a
+          >
         {% endif %}
       {% endif %}
-      {% if entry.demo and entry.demo != "" %}
+      {% if entry.demo and entry.demo != '' %}
         {% if entry.demo contains '://' %}
-          <a href="{{ entry.demo }}" class="btn btn-sm z-depth-0" role="button">Demo</a>
+          <a href="{{ entry.demo }}" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener noreferrer"
+            ><i class="fa-solid fa-play-circle" style="margin-right: 0.5rem;"></i>Demo</a
+          >
         {% else %}
-          <a href="{{ entry.demo | relative_url }}" class="btn btn-sm z-depth-0" role="button">Demo</a>
+          <a href="{{ entry.demo | relative_url }}" class="btn btn-sm z-depth-0" role="button"
+            ><i class="fa-solid fa-play-circle" style="margin-right: 0.5rem;"></i>Demo</a
+          >
         {% endif %}
       {% endif %}
       {% if entry.poster %}

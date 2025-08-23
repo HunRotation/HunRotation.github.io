@@ -150,6 +150,8 @@ collections:
     output: true
   news:
     output: true
+  projects:
+    output: true
 
 # -----------------------------------------------------------------------------
 # Jekyll settings
@@ -171,10 +173,6 @@ kramdown:
 # Includes & excludes
 include: ["_pages", "_scripts"]
 exclude:
-  - _pages/projects.md
-  - _projects/
-  - _includes/projects.liquid
-  - _includes/projects_horizontal.liquid
   - bin/
   - CONTRIBUTING.md
   - CUSTOMIZE.md
