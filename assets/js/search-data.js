@@ -38,7 +38,7 @@ ninja.data = [{
           description: "",
           section: "News",},{id: "projects-aimoclips-a-benchmark-for-evaluating-emotion-conveyance-in-text-to-music-generation",
           title: 'AImoclips: A Benchmark for Evaluating Emotion Conveyance in Text-to-Music Generation',
-          description: "A comprehensive benchmark for evaluating how well text-to-music (TTM) generation systems convey intended emotions to human listeners.",
+          description: "Gyehun Go, Satbyul Han, Ahyeon Choi, Eunjin Choi, Juhan Nam and Jeong Mi Park",
           section: "Projects",handler: () => {
               window.location.href = "/projects/aimoclips.html";
             },},{
