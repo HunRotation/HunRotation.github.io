@@ -7,6 +7,9 @@
   }
 </style>
 <div class="row">
+  <div class="col-sm-12">
+    <pre>{{ entry | inspect }}</pre>
+  </div>
   {% if site.enable_publication_thumbnails %}
     <div class="col col-sm-2 abbr">
       {%- if entry.abbr -%}
