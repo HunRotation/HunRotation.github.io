@@ -1,0 +1,4 @@
+{% assign project_entry = site.scholar.bibliography | where: "key", include.project_key | first %}
+{% if project_entry %}
+  <p class="project-authors">{{ project_entry.author }}</p>
+{% endif %}
