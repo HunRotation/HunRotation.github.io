@@ -1,7 +1,7 @@
 ---
 layout: project
 title: "AImoclips: A Benchmark for Evaluating Emotion Conveyance in Text-to-Music Generation"
-description: A comprehensive benchmark for evaluating how well text-to-music (TTM) generation systems convey intended emotions to human listeners.
+description: Gyehun Go, Satbyul Han, Ahyeon Choi, Eunjin Choi, Juhan Nam and Jeong Mi Park
 img: assets/img/aimoclips.jpg # Add a preview image to this path
 importance: 1
 category: work
