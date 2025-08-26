@@ -34,12 +34,19 @@ Our analysis reveals significant differences in emotional conveyance across vari
 <style>
 * {box-sizing: border-box;}
 .slideshow-container {
-  max-width: 1000px;
+  max-width: 800px; /* Fixed width */
   position: relative;
   margin: auto;
+  border: 1px solid #ddd; /* Added a border for better visibility */
 }
 .mySlides {
   display: none;
+  text-align: center; /* Center the image */
+}
+.mySlides img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
 }
 .prev, .next {
   cursor: pointer;
@@ -54,55 +61,38 @@ Our analysis reveals significant differences in emotional conveyance across vari
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
   user-select: none;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.3); /* a bit more transparent */
 }
 .next {
   right: 0;
   border-radius: 3px 0 0 3px;
 }
 .prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.6);
 }
 .text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
+  color: #333;
+  font-size: 14px;
+  padding: 15px;
   text-align: center;
-  background-color: rgba(0,0,0,0.5);
-}
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-@-webkit-keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
+  background-color: #f2f2f2;
 }
 </style>
 
 <div class="slideshow-container">
-  <div class="mySlides fade">
-    <img src="/assets/img/AImoclips/model_averages_only.png" style="width:100%">
-    <div class="text">Mean valence and arousal ratings for each Text-to-Music (TTM) system, averaged across all emotion intents. The origin (0,0) represents neutral valence and arousal. Error bars indicate 95% confidence intervals. This figure highlights model-specific biases in emotion rendering.</div>
+  <div class="mySlides">
+    <img src="/assets/img/AImoclips/model_averages_only.png">
+    <div class="text">Mean valence and arousal deviations for each Text-to-Music (TTM) system, averaging (clip ratings - corresponding emotion intent scores) across all emotion intents.</div>
   </div>
 
-  <div class="mySlides fade">
-    <img src="/assets/img/AImoclips/quadrant_analysis_scatter_plots.png" style="width:100%">
-    <div class="text">Scatter plots of rated valence and arousal for each of the four emotional quadrants: High Arousal/High Valence (HAHV), High Arousal/Low Valence (HALV), Low Arousal/Low Valence (LALV), and Low Arousal/High Valence (LAHV). Each point represents a music clip, and ellipses denote 95% confidence intervals for each TTM system.</div>
+  <div class="mySlides">
+    <img src="/assets/img/AImoclips/quadrant_mean_comparison_plot.png">
+    <div class="text">Mean valence and arousal deviations for each valence-arousal quadrant, averaging (clip ratings - corresponding emotion intent scores) across all TTM systems.</div>
   </div>
 
-  <div class="mySlides fade">
-    <img src="/assets/img/AImoclips/quadrant_mean_comparison_plot.png" style="width:100%">
-    <div class="text">Comparison of intended versus rated mean valence and arousal for each TTM system across the four emotional quadrants. Arrows connect the intended emotional target (e.g., HAHV) to the actual perceived emotional output, illustrating the direction and magnitude of emotional distortion for each model.</div>
+  <div class="mySlides">
+    <img src="/assets/img/AImoclips/quadrant_analysis_scatter_plots.png">
+    <div class="text">Valence–arousal quadrant distributions for each TTM system. Stars show mean ratings per quadrant, ’X’ marks represent ground truth scores of emotion intents, and ellipses indicate 95% confidence regions.</div>
   </div>
 
   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
