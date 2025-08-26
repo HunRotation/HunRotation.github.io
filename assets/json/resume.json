@@ -146,7 +146,7 @@
     {
       "name": "Decomposing Complex Visual Comprehension into Atomic Visual Skills for Vision Language Models",
       "publisher": "The 4th Workshop on Mathematical Reasoning and AI at NeurIPS'24",
-      "releaseDate": "2024",
+      "releaseDate": "2024-12",
       "authors": ["Hyunsik Chae", "Seungwoo Yoon", "Chloe Yewon Chun", "Gyehun Go", "Yongin Cho", "Gyeongmin Lee", "Ernest K. Ryu"],
       "url": "https://openreview.net/forum?id=nFU4xCyoe0",
       "summary": "",
@@ -156,12 +156,12 @@
     {
       "name": "AImoclips: A Benchmark for Evaluating Emotion Conveyance in Text-to-Music Generation",
       "publisher": "HCMIR25: 3rd Workshop on Human-Centric Music Information Research at ISMIR'25",
-      "releaseDate": "2025",
+      "releaseDate": "2025-09",
       "authors": ["Gyehun Go", "Satbyul Han", "Ahyeon Choi", "Eunjin Choi", "Juhan Nam", "Jeong Mi Park"],
       "summary": "",
       "paper": "https://arxiv.org/abs/YOUR_PAPER_ID",
       "code": "https://github.com/HunRotation/AImoclips",
-      "demo": "/projects/aimoclips/"
+      "demo": "https://hunrotation.github.io/projects/aimoclips.html"
     }
   ]
 }
