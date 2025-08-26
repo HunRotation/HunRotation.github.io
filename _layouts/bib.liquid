@@ -61,7 +61,7 @@
     <!-- Author -->
     <div class="author">
       {% for author in entry.author_array %}
-        {{ author.first }} {{ author.last }}{% unless forloop.last %}, {% endunless %}
+        {% if author.me %}<strong>{{ author.first }} {{ author.last }}</strong>{% else %}{{ author.first }} {{ author.last }}{% endif %}{% unless forloop.last %}, {% endunless %}
       {% endfor %}
     </div>
 
