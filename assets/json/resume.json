@@ -3,7 +3,6 @@
     "name": "Gyehun Go",
     "image": "",
     "email": "rotation@kaist.ac.kr",
-    "phone": "+82 10-2094-8708",
     "url": "https://hunrotation.github.io",
     "location": {
       "address": "291 Daehak-ro, Yuseong-gu",
@@ -160,8 +159,7 @@
       "authors": ["Gyehun Go", "Satbyul Han", "Ahyeon Choi", "Eunjin Choi", "Juhan Nam", "Jeong Mi Park"],
       "summary": "",
       "paper": "https://arxiv.org/abs/YOUR_PAPER_ID",
-      "code": "https://github.com/HunRotation/AImoclips",
-      "demo": "https://hunrotation.github.io/projects/aimoclips.html"
+      "code": "https://github.com/HunRotation/AImoclips"
     }
   ]
 }

@@ -2,7 +2,7 @@
 layout: project
 title: "AImoclips: A Benchmark for Evaluating Emotion Conveyance in Text-to-Music Generation"
 description: Gyehun Go, Satbyul Han, Ahyeon Choi, Eunjin Choi, Juhan Nam and Jeong Mi Park
-img: assets/img/aimoclips.jpg # Add a preview image to this path
+img: assets/img/AImoclips/quadrant_analysis_scatter_plots.png
 importance: 1
 category: work
 project_key: go2025aimoclips
