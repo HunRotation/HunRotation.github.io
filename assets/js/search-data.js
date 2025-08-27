@@ -42,13 +42,6 @@ ninja.data = [{
           section: "Projects",handler: () => {
               window.location.href = "/projects/aimoclips.html";
             },},{
-        id: 'social-phone',
-        title: 'Phone',
-        section: 'Socials',
-        handler: () => {
-          window.open("", "_blank");
-        },
-      },{
         id: 'social-address',
         title: 'Address',
         section: 'Socials',
