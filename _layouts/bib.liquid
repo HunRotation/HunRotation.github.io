@@ -7,9 +7,7 @@
   }
 </style>
 <div class="row">
-  <div class="col-sm-12">
-    
-  </div>
+  <div class="col-sm-12"></div>
   {% if site.enable_publication_thumbnails %}
     <div class="col col-sm-2 abbr">
       {%- if entry.abbr -%}
@@ -61,7 +59,16 @@
     <!-- Author -->
     <div class="author">
       {% for author in entry.author_array %}
-        {% if author.me %}<strong>{{ author.first }} {{ author.last }}</strong>{% else %}{{ author.first }} {{ author.last }}{% endif %}{% unless forloop.last %}, {% endunless %}
+        {% if author.me -%}
+          <strong>
+            {{- author.first }}
+            {{ author.last -}}
+          </strong>
+        {%- else -%}
+          {{- author.first }}
+          {{ author.last -}}
+        {%- endif -%}
+        {%- unless forloop.last %}, {% endunless %}
       {% endfor %}
     </div>
 
@@ -111,9 +118,6 @@
       {% endif %}
       {% if entry.abstract %}
         <a class="abstract btn z-depth-0" role="button">Abs</a>
-      {% endif %}
-      {% if entry.doi %}
-        <a href="https://doi.org/{{ entry.doi }}" class="btn z-depth-0" role="button">DOI</a>
       {% endif %}
       {% if entry.arxiv %}
         <a href="http://arxiv.org/abs/{{ entry.arxiv }}" class="btn z-depth-0" role="button">arXiv</a>
