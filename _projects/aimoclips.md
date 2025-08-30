@@ -123,12 +123,32 @@ function showSlides(n) {
 
 ## Examples
 
-| Music Source | TTM System | Emotion Intent | Rated Mean Valence | Rated Mean Arousal |
-| :----------- | :--------- | :------------- | :----------------- | :----------------- |
-| Example 1    | MusicGen   | Happy          | 0.8                | 0.7                |
-| Example 2    | Riffusion  | Sad            | -0.6               | -0.5               |
-| Example 3    | Mubert     | Energetic      | 0.5                | 0.9                |
-| Example 4    | MusicGen   | Calm           | 0.2                | -0.8               |
+
+<div class="table-responsive">
+<table class="table table-sm table-borderless">
+<thead>
+<tr>
+<th scope="col">Music Source</th>
+<th scope="col">TTM System</th>
+<th scope="col">Emotion Intent</th>
+<th scope="col">Rated Mean Valence</th>
+<th scope="col">Rated Mean Arousal</th>
+</tr>
+</thead>
+<tbody>
+{% for sample in site.data.aimoclips_samples %}
+<tr>
+<td><audio controls><source src="{{ sample.music_source | relative_url }}" type="audio/mpeg"></audio></td>
+<td>{{ sample.ttm_system }}</td>
+<td>{{ sample.emotion_intent }}</td>
+<td>{{ sample.rated_mean_valence }}</td>
+<td>{{ sample.rated_mean_arousal }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
 
 ---
 
