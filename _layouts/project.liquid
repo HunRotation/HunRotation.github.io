@@ -8,12 +8,11 @@ layout: default
       {% include project_authors.liquid project_key=page.project_key %}
     {% endif %}
     {% if page.description and page.hide_description != true %}
-    <p class="post-description">{{ page.description }}</p>
+      <p class="post-description">{{ page.description }}</p>
     {% endif %}
   </header>
 
   <article>
     {{ content }}
   </article>
-
 </div>

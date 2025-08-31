@@ -23,8 +23,6 @@ Recent advances in text-to-music (TTM) generation have enabled controllable and 
 
 ## Method
 
-
-
 ---
 
 ## Results
@@ -95,8 +93,9 @@ Our analysis reveals significant differences in emotional conveyance across vari
     <div class="text">Valence–arousal quadrant distributions for each TTM system. Stars show mean ratings per quadrant, ’X’ marks represent ground truth scores of emotion intents, and ellipses indicate 95% confidence regions.</div>
   </div>
 
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+<a class="next" onclick="plusSlides(1)">&#10095;</a>
+
 </div>
 
 <script>
@@ -123,26 +122,25 @@ function showSlides(n) {
 
 ## Examples
 
-
-
 {%- assign audio_files = site.static_files | where_exp: "item", "item.path contains '/assets/audio'" -%}
 {%- assign aimoclips_samples = '' | split: '' -%}
 {%- for audio_file in audio_files -%}
-  {%- assign filename = audio_file.path | split: '/' | last -%}
-  {%- assign parts = filename | remove: ".wav" | split: '_' -%}
-  {%- assign model = parts[0] -%}
-  {%- assign emotion = parts[1] -%}
-  {%- assign file_index = parts[2] | plus: 0 -%}
+{%- assign filename = audio_file.path | split: '/' | last -%}
+{%- assign parts = filename | remove: ".wav" | split: '_' -%}
+{%- assign model = parts[0] -%}
+{%- assign emotion = parts[1] -%}
+{%- assign file_index = parts[2] | plus: 0 -%}
 
-  {%- for row in site.data.clips_metadata -%}
-    {%- if row.model == model and row.emotion == emotion and row.file_index == file_index -%}
-      {%- assign sample = row -%}
-      {%- assign sample_with_source = sample | merge: {'music_source': audio_file.path} -%}
-      {%- assign aimoclips_samples = aimoclips_samples | push: sample_with_source -%}
-      {%- break -%}
-    {%- endif -%}
-  {%- endfor -%}
+{%- for row in site.data.clips_metadata -%}
+{%- if row.model == model and row.emotion == emotion and row.file_index == file_index -%}
+{%- assign sample = row -%}
+{%- assign sample_with_source = sample | merge: {'music_source': audio_file.path} -%}
+{%- assign aimoclips_samples = aimoclips_samples | push: sample_with_source -%}
+{%- break -%}
+{%- endif -%}
 {%- endfor -%}
+{%- endfor -%}
+
 <table class="table table-sm table-borderless">
 <thead>
 <tr>
@@ -166,8 +164,6 @@ function showSlides(n) {
 </tbody>
 </table>
 </div>
-
-
 
 ---
 
