@@ -191,9 +191,7 @@ html[data-theme="dark"] .slider-value {
 </thead>
 <tbody>
 {% for sample in site.data.AImoclips_example %}
-{% assign gt_scores = gt_valence_arousal_scores[sample.emotion] %}
-<p>Debug: Emotion: {{ sample.emotion }}</p>
-<p>Debug: GT Scores: {{ gt_scores | inspect }}</p>
+{% assign gt_scores = gt_valence_arousal_scores[sample.emotion | strip] %}
 <tr>
 <td><audio controls><source src="/assets/audio/{{ sample.audio_file }}" type="audio/wav"></audio></td>
 <td>{{ sample.model }}</td>
