@@ -134,14 +134,13 @@ function showSlides(n) {
   {%- assign emotion = parts[1] -%}
   {%- assign file_index = parts[2] | plus: 0 -%}
 
-  {%- assign rows = site.data.clips_metadata | where: "model", model | where: "emotion", emotion | where: "file_index", file_index -%}
+  {%- assign rows = site.data.clips_metadata | where_exp: "item", "item.model == model and item.emotion == emotion and item.file_index == file_index" -%}
   {%- if rows.size > 0 -%}
     {%- assign sample = rows[0] -%}
     {%- assign sample_with_source = sample | merge: {'music_source': audio_file.path} -%}
     {%- assign aimoclips_samples = aimoclips_samples | push: sample_with_source -%}
   {%- endif -%}
 {%- endfor -%}
-
 <div class="table-responsive">
 <table class="table table-sm table-borderless">
 <thead>
@@ -156,7 +155,7 @@ function showSlides(n) {
 <tbody>
 {% for sample in aimoclips_samples %}
 <tr>
-<td><audio controls><source src="{{ sample.music_source | relative_url }}" type="audio/mpeg"></audio></td>
+<td><audio controls><source src="{{ sample.music_source | relative_url }}" type="audio/wav"></audio></td>
 <td>{{ sample.model }}</td>
 <td>{{ sample.emotion }}</td>
 <td>{{ sample.valence }}</td>
