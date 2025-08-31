@@ -164,20 +164,6 @@ html[data-theme="dark"] .slider-value {
   color: white;
 }
 </style>
-{% assign gt_valence_arousal_scores = {
-    "happy": [8.47, 6.05],
-    "excited": [8.11, 6.43],
-    "energetic": [7.57, 6.1],
-    "angry": [2.53, 6.2],
-    "anxious": [3.8, 6.2],
-    "scared": [2.8, 6.1],
-    "sad": [2.1, 3.49],
-    "gloomy": [3.15, 3.32],
-    "dull": [3.4, 1.67],
-    "relaxed": [7.25, 2.49],
-    "calm": [6.89, 1.67],
-    "tranquil": [7.11, 2.61]
-} %}
 <div class="table-responsive">
 <table class="table table-sm table-borderless">
 <thead>
@@ -191,7 +177,8 @@ html[data-theme="dark"] .slider-value {
 </thead>
 <tbody>
 {% for sample in site.data.AImoclips_example %}
-{% assign gt_scores = gt_valence_arousal_scores[sample.emotion | strip] %}
+{% assign emotion = sample.emotion | strip %}
+{% assign gt_scores = site.data.gt_scores[emotion] %}
 <tr>
 <td><audio controls><source src="/assets/audio/{{ sample.audio_file }}" type="audio/wav"></audio></td>
 <td>{{ sample.model }}</td>
