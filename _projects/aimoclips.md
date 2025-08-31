@@ -124,6 +124,24 @@ function showSlides(n) {
 ## Examples
 
 
+
+{%- assign audio_files = site.static_files | where_exp: "item", "item.path contains '/assets/audio'" -%}
+{%- assign aimoclips_samples = '' | split: '' -%}
+{%- for audio_file in audio_files -%}
+  {%- assign filename = audio_file.path | split: '/' | last -%}
+  {%- assign parts = filename | remove: ".wav" | split: '_' -%}
+  {%- assign model = parts[0] -%}
+  {%- assign emotion = parts[1] -%}
+  {%- assign file_index = parts[2] | plus: 0 -%}
+
+  {%- assign rows = site.data.clips_metadata | where: "model", model | where: "emotion", emotion | where: "file_index", file_index -%}
+  {%- if rows.size > 0 -%}
+    {%- assign sample = rows[0] -%}
+    {%- assign sample_with_source = sample | push: 'music_source', audio_file.path -%}
+    {%- assign aimoclips_samples = aimoclips_samples | push: sample_with_source -%}
+  {%- endif -%}
+{%- endfor -%}
+
 <div class="table-responsive">
 <table class="table table-sm table-borderless">
 <thead>
@@ -136,18 +154,19 @@ function showSlides(n) {
 </tr>
 </thead>
 <tbody>
-{% for sample in site.data.aimoclips_samples %}
+{% for sample in aimoclips_samples %}
 <tr>
 <td><audio controls><source src="{{ sample.music_source | relative_url }}" type="audio/mpeg"></audio></td>
-<td>{{ sample.ttm_system }}</td>
-<td>{{ sample.emotion_intent }}</td>
-<td>{{ sample.rated_mean_valence }}</td>
-<td>{{ sample.rated_mean_arousal }}</td>
+<td>{{ sample.model }}</td>
+<td>{{ sample.emotion }}</td>
+<td>{{ sample.valence }}</td>
+<td>{{ sample.arousal }}</td>
 </tr>
 {% endfor %}
 </tbody>
 </table>
 </div>
+
 
 
 ---
