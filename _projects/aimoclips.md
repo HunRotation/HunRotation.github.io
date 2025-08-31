@@ -130,7 +130,7 @@ function showSlides(n) {
 }
 .slider-label {
     font-size: 0.8em;
-    color: #666;
+    color: #eee;
     margin-bottom: 2px;
 }
 .slider-track {
@@ -156,8 +156,12 @@ function showSlides(n) {
   transform: translateX(-50%);
   font-size: 0.8em;
   white-space: nowrap;
-  background-color: #fff;
+  background-color: var(--global-bg-color);
+  color: var(--global-text-color);
   padding: 0 3px;
+}
+html[data-theme="dark"] .slider-value {
+  color: white;
 }
 </style>
 <div class="table-responsive">
