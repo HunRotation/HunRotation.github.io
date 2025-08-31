@@ -1314,6 +1314,17 @@ ninja-keys::part(ninja-input-wrapper) {
   }
 }
 
+html[data-theme="dark"] {
+  .popover {
+    background-color: var(--global-bg-color);
+
+    .popover-header,
+    .popover-body {
+      color: white;
+    }
+  }
+}
+
 .bs-popover-top {
   // arrow fill color
   .arrow::after {
