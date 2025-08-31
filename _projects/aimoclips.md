@@ -137,7 +137,7 @@ function showSlides(n) {
   {%- assign rows = site.data.clips_metadata | where: "model", model | where: "emotion", emotion | where: "file_index", file_index -%}
   {%- if rows.size > 0 -%}
     {%- assign sample = rows[0] -%}
-    {%- assign sample_with_source = sample | push: 'music_source', audio_file.path -%}
+    {%- assign sample_with_source = sample | merge: {'music_source': audio_file.path} -%}
     {%- assign aimoclips_samples = aimoclips_samples | push: sample_with_source -%}
   {%- endif -%}
 {%- endfor -%}
