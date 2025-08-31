@@ -122,6 +122,44 @@ function showSlides(n) {
 
 ## Examples
 
+<style>
+.slider-container {
+  margin-bottom: 15px;
+  position: relative;
+  height: 25px;
+}
+.slider-label {
+    font-size: 0.8em;
+    color: #666;
+    margin-bottom: 2px;
+}
+.slider-track {
+  width: 100%;
+  height: 10px;
+  background-color: #eee;
+  border-radius: 5px;
+  position: relative;
+}
+.slider-thumb {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--global-theme-color);
+  border-radius: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+.slider-value {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8em;
+  white-space: nowrap;
+  background-color: #fff;
+  padding: 0 3px;
+}
+</style>
 <div class="table-responsive">
 <table class="table table-sm table-borderless">
 <thead>
@@ -129,8 +167,7 @@ function showSlides(n) {
 <th scope="col">Music Source</th>
 <th scope="col">TTM System</th>
 <th scope="col">Emotion Intent</th>
-<th scope="col">Rated Mean Valence</th>
-<th scope="col">Rated Mean Arousal</th>
+<th scope="col">Rated Mean Valence & Arousal</th>
 </tr>
 </thead>
 <tbody>
@@ -139,8 +176,24 @@ function showSlides(n) {
 <td><audio controls><source src="/assets/audio/{{ sample.audio_file }}" type="audio/wav"></audio></td>
 <td>{{ sample.model }}</td>
 <td>{{ sample.emotion }}</td>
-<td>{{ sample.valence }}</td>
-<td>{{ sample.arousal }}</td>
+<td>
+  <div class="slider-container">
+    <div class="slider-label">Valence</div>
+    <div class="slider-track">
+      <div class="slider-thumb" style="left: {{ sample.valence | minus: 1 | divided_by: 8 | times: 100 }}%;">
+        <span class="slider-value">{{ sample.valence | round: 2 }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="slider-container">
+    <div class="slider-label">Arousal</div>
+    <div class="slider-track">
+      <div class="slider-thumb" style="left: {{ sample.arousal | minus: 1 | divided_by: 8 | times: 100 }}%;">
+        <span class="slider-value">{{ sample.arousal | round: 2 }}</span>
+      </div>
+    </div>
+  </div>
+</td>
 </tr>
 {% endfor %}
 </tbody>
