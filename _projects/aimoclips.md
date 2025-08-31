@@ -142,8 +142,7 @@ function showSlides(n) {
       {%- break -%}
     {%- endif -%}
   {%- endfor -%}
-
-
+{%- endfor -%}
 <table class="table table-sm table-borderless">
 <thead>
 <tr>
@@ -166,6 +165,7 @@ function showSlides(n) {
 {% endfor %}
 </tbody>
 </table>
+</div>
 
 
 
