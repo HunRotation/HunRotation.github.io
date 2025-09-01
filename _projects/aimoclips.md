@@ -187,7 +187,12 @@ html[data-theme="dark"] .slider-value {
   <div class="slider-container">
     <div class="slider-label">GT</div>
     <div class="slider-track">
-      <div class="slider-thumb" style="left: {{ gt_scores[0] | minus: 1 | divided_by: 8 | times: 100 }}%;">
+{% assign v_gt_score_norm = gt_scores[0] | minus: 1 | divided_by: 8.0 %}
+{% assign v_gt_r = 1 | minus: v_gt_score_norm | times: 128 | round %}
+{% assign v_gt_g = v_gt_score_norm | times: 128 | round %}
+{% assign v_gt_b = 1 | minus: v_gt_score_norm | times: 128 | round %}
+{% assign v_gt_color = 'rgb(' | append: v_gt_r | append: ',' | append: v_gt_g | append: ',' | append: v_gt_b | append: ')' %}
+      <div class="slider-thumb" style="left: {{ gt_scores[0] | minus: 1 | divided_by: 8 | times: 100 }}%; background-color: {{ v_gt_color }};">
         <span class="slider-value">{{ gt_scores[0] | round: 2 }}</span>
       </div>
     </div>
@@ -195,7 +200,12 @@ html[data-theme="dark"] .slider-value {
   <div class="slider-container">
     <div class="slider-label">Rated</div>
     <div class="slider-track">
-      <div class="slider-thumb" style="left: {{ sample.valence | minus: 1 | divided_by: 8 | times: 100 }}%;">
+{% assign v_rated_score_norm = sample.valence | minus: 1 | divided_by: 8.0 %}
+{% assign v_rated_r = 1 | minus: v_rated_score_norm | times: 128 | round %}
+{% assign v_rated_g = v_rated_score_norm | times: 128 | round %}
+{% assign v_rated_b = 1 | minus: v_rated_score_norm | times: 128 | round %}
+{% assign v_rated_color = 'rgb(' | append: v_rated_r | append: ',' | append: v_rated_g | append: ',' | append: v_rated_b | append: ')' %}
+      <div class="slider-thumb" style="left: {{ sample.valence | minus: 1 | divided_by: 8 | times: 100 }}%; background-color: {{ v_rated_color }};">
         <span class="slider-value">{{ sample.valence | round: 2 }}</span>
       </div>
     </div>
@@ -205,7 +215,12 @@ html[data-theme="dark"] .slider-value {
   <div class="slider-container">
     <div class="slider-label">GT</div>
     <div class="slider-track">
-      <div class="slider-thumb" style="left: {{ gt_scores[1] | minus: 1 | divided_by: 8 | times: 100 }}%;">
+{% assign a_gt_score_norm = gt_scores[1] | minus: 1 | divided_by: 8.0 %}
+{% assign a_gt_r = a_gt_score_norm | times: 255 | round %}
+{% assign a_gt_g = 0 %}
+{% assign a_gt_b = 1 | minus: a_gt_score_norm | times: 255 | round %}
+{% assign a_gt_color = 'rgb(' | append: a_gt_r | append: ',' | append: a_gt_g | append: ',' | append: a_gt_b | append: ')' %}
+      <div class="slider-thumb" style="left: {{ gt_scores[1] | minus: 1 | divided_by: 8 | times: 100 }}%; background-color: {{ a_gt_color }};">
         <span class="slider-value">{{ gt_scores[1] | round: 2 }}</span>
       </div>
     </div>
@@ -213,7 +228,12 @@ html[data-theme="dark"] .slider-value {
   <div class="slider-container">
     <div class="slider-label">Rated</div>
     <div class="slider-track">
-      <div class="slider-thumb" style="left: {{ sample.arousal | minus: 1 | divided_by: 8 | times: 100 }}%;">
+{% assign a_rated_score_norm = sample.arousal | minus: 1 | divided_by: 8.0 %}
+{% assign a_rated_r = a_rated_score_norm | times: 255 | round %}
+{% assign a_rated_g = 0 %}
+{% assign a_rated_b = 1 | minus: a_rated_score_norm | times: 255 | round %}
+{% assign a_rated_color = 'rgb(' | append: a_rated_r | append: ',' | append: a_rated_g | append: ',' | append: a_rated_b | append: ')' %}
+      <div class="slider-thumb" style="left: {{ sample.arousal | minus: 1 | divided_by: 8 | times: 100 }}%; background-color: {{ a_rated_color }};">
         <span class="slider-value">{{ sample.arousal | round: 2 }}</span>
       </div>
     </div>
