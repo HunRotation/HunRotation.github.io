@@ -1,6 +1,6 @@
 - index: 498
   audio_file: AudioLDM2_angry_8.wav
-  model: AudioLDM2
+  model: AudioLDM 2
   emotion: angry
   file_index: 8
   valence: 4.4
@@ -8,7 +8,7 @@
   num_annotators: 5
 - index: 261
   audio_file: AudioLDM2_gloomy_4.wav
-  model: AudioLDM2
+  model: AudioLDM 2
   emotion: gloomy
   file_index: 4
   valence: 3.833
@@ -16,7 +16,7 @@
   num_annotators: 6
 - index: 302
   audio_file: AudioLDM2_happy_5.wav
-  model: AudioLDM2
+  model: AudioLDM 2
   emotion: happy
   file_index: 5
   valence: 6.8
@@ -24,7 +24,7 @@
   num_annotators: 5
 - index: 93
   audio_file: AudioLDM2_relaxed_2.wav
-  model: AudioLDM2
+  model: AudioLDM 2
   emotion: relaxed
   file_index: 2
   valence: 6.0
@@ -96,7 +96,7 @@
   num_annotators: 7
 - index: 105
   audio_file: StableAudio_dull_2.wav
-  model: StableAudio
+  model: Stable Audio Open
   emotion: dull
   file_index: 2
   valence: 7.167
@@ -104,7 +104,7 @@
   num_annotators: 6
 - index: 915
   audio_file: StableAudio_excited_13.wav
-  model: StableAudio
+  model: Stable Audio Open
   emotion: excited
   file_index: 13
   valence: 6.125
@@ -112,7 +112,7 @@
   num_annotators: 8
 - index: 458
   audio_file: StableAudio_relaxed_7.wav
-  model: StableAudio
+  model: Stable Audio Open
   emotion: relaxed
   file_index: 7
   valence: 4.0
@@ -120,7 +120,7 @@
   num_annotators: 9
 - index: 82
   audio_file: StableAudio_scared_2.wav
-  model: StableAudio
+  model: Stable Audio Open
   emotion: scared
   file_index: 2
   valence: 4.143
