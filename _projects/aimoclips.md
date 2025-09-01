@@ -130,15 +130,21 @@ function showSlides(n) {
 }
 .slider-label {
     font-size: 0.8em;
-    color: #eee;
+    color: #333; /* Dark gray for light mode */
     margin-bottom: 2px;
+}
+html[data-theme="dark"] .slider-label {
+    color: #eee; /* Bright for dark mode */
 }
 .slider-track {
   width: 100%;
   height: 10px;
-  background-color: #eee;
+  background-color: #ccc; /* Lighter gray for light mode track */
   border-radius: 5px;
   position: relative;
+}
+html[data-theme="dark"] .slider-track {
+  background-color: #eee; /* Bright for dark mode track */
 }
 .slider-thumb {
   position: absolute;
