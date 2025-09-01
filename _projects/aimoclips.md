@@ -171,8 +171,8 @@ html[data-theme="dark"] .slider-value {
 <th scope="col">Music Source</th>
 <th scope="col">TTM System</th>
 <th scope="col">Emotion Intent</th>
-<th scope="col">Ground Truth Valence & Arousal</th>
-<th scope="col">Rated Mean Valence & Arousal</th>
+<th scope="col">Valence (Ground Truth vs Rated)</th>
+<th scope="col">Arousal (Ground Truth vs Rated)</th>
 </tr>
 </thead>
 <tbody>
@@ -185,7 +185,7 @@ html[data-theme="dark"] .slider-value {
 <td>{{ sample.emotion }}</td>
 <td>
   <div class="slider-container">
-    <div class="slider-label">Valence</div>
+    <div class="slider-label">GT</div>
     <div class="slider-track">
       <div class="slider-thumb" style="left: {{ gt_scores[0] | minus: 1 | divided_by: 8 | times: 100 }}%;">
         <span class="slider-value">{{ gt_scores[0] | round: 2 }}</span>
@@ -193,25 +193,25 @@ html[data-theme="dark"] .slider-value {
     </div>
   </div>
   <div class="slider-container">
-    <div class="slider-label">Arousal</div>
-    <div class="slider-track">
-      <div class="slider-thumb" style="left: {{ gt_scores[1] | minus: 1 | divided_by: 8 | times: 100 }}%;">
-        <span class="slider-value">{{ gt_scores[1] | round: 2 }}</span>
-      </div>
-    </div>
-  </div>
-</td>
-<td>
-  <div class="slider-container">
-    <div class="slider-label">Valence</div>
+    <div class="slider-label">Rated</div>
     <div class="slider-track">
       <div class="slider-thumb" style="left: {{ sample.valence | minus: 1 | divided_by: 8 | times: 100 }}%;">
         <span class="slider-value">{{ sample.valence | round: 2 }}</span>
       </div>
     </div>
   </div>
+</td>
+<td>
   <div class="slider-container">
-    <div class="slider-label">Arousal</div>
+    <div class="slider-label">GT</div>
+    <div class="slider-track">
+      <div class="slider-thumb" style="left: {{ gt_scores[1] | minus: 1 | divided_by: 8 | times: 100 }}%;">
+        <span class="slider-value">{{ gt_scores[1] | round: 2 }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="slider-container">
+    <div class="slider-label">Rated</div>
     <div class="slider-track">
       <div class="slider-thumb" style="left: {{ sample.arousal | minus: 1 | divided_by: 8 | times: 100 }}%;">
         <span class="slider-value">{{ sample.arousal | round: 2 }}</span>
