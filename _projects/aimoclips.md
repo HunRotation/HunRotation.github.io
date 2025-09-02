@@ -23,6 +23,11 @@ Recent advances in text-to-music (TTM) generation have enabled controllable and 
 
 ## Method
 
+The method involved a multi-step process to create and evaluate the AImoclips benchmark. First, **12 emotion intents were selected from the valence-arousal space**, excluding intermediate values to ensure clear emotional separation. Six state-of-the-art text-to-music (TTM) systems, including both open-source and commercial models, were used to generate 991 ten-second music clips based on these emotion intents. Finally, an online survey was conducted with 111 participants to **collect valence and arousal ratings for each clip** on a 9-point Likert scale, ensuring a robust human evaluation of the emotional conveyance of the generated music. The images below are displayed along questions to help participants understand the concepts of valence and arousal.
+
+{% include figure.liquid path="/assets/img/AImoclips/valence_scale.png" class="img-fluid" %}
+{% include figure.liquid path="/assets/img/AImoclips/arousal_scale.png" class="img-fluid" %}
+
 ---
 
 ## Results
