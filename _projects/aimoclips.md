@@ -9,7 +9,7 @@ project_key: go2025aimoclips
 ---
 
 <div class="buttons" style="text-align: center; margin: 2rem 0;">
-    <a href="https://arxiv.org/abs/YOUR_PAPER_ID" class="btn" role="button" target="_blank" rel="noopener noreferrer" style="background-color: var(--global-theme-color); border-color: var(--global-theme-color);"><i class="fa-solid fa-file-lines" style="margin-right: 0.5rem;"></i>Paper</a>
+    <a href="https://arxiv.org/abs/2509.00813" class="btn" role="button" target="_blank" rel="noopener noreferrer" style="background-color: var(--global-theme-color); border-color: var(--global-theme-color);"><i class="fa-solid fa-file-lines" style="margin-right: 0.5rem;"></i>Paper</a>
     <a href="https://github.com/HunRotation/AImoclips" class="btn" role="button" target="_blank" rel="noopener noreferrer" style="background-color: var(--global-theme-color); border-color: var(--global-theme-color);"><i class="fa-brands fa-github" style="margin-right: 0.5rem;"></i>Dataset</a>
 </div>
 
