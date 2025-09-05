@@ -6,7 +6,7 @@ subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
 
 profile:
   align: right
-  image: hunrotation_profimg.jpg
+  image: hunrotation_profimg.jpeg
   image_circular: true # crops the image to make it circular
   more_info: >
     <p>M.S. in KAIST Graduate School of Culture Technology</p>
