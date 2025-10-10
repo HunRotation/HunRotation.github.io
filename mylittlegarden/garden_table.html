@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Little Garden - Table</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background-color: #000;
+    }
+    #bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: calc(100% / 0.92);
+      object-fit: cover;
+    }
+    .control-button, .back-button {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-family: sans-serif;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none;
+    }
+    .control-button:hover, .back-button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    .control-button:disabled {
+        background-color: rgba(0, 0, 0, 0.8);
+        cursor: default;
+    }
+    #button-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      gap: 10px;
+    }
+    .back-button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+<body>
+  <img id="bg-image" src="" alt="Garden Table">
+  <div id="button-container">
+    <button id="morning-button" class="control-button">Morning</button>
+    <button id="midday-button" class="control-button">Midday</button>
+    <button id="evening-button" class="control-button">Evening</button>
+    <button id="night-button" class="control-button">Night</button>
+  </div>
+  <a href="index.html" class="back-button">Back</a>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let bgm;
+        let theme;
+
+        const audioDir = '../assets/audio/mylittlegarden/';
+        const audioMap = {
+            morning: 'bgm_garden_morning.mp3',
+            midday: 'bgm_garden_midday.mp3',
+            evening: 'bgm_garden_evening.mp3',
+            night: 'bgm_garden_night.mp3'
+        };
+
+        const imageDir = '../assets/img/mylittlegarden/';
+        const imageMap = {
+            morning: 'mylittlegarden_morning_closetable.png',
+            midday: 'mylittlegarden_midday_closetable.jpg',
+            evening: 'mylittlegarden_evening_closetable.png',
+            night: 'mylittlegarden_night_closetable.png'
+        };
+
+        const themeButtons = {
+            morning: document.getElementById('morning-button'),
+            midday: document.getElementById('midday-button'),
+            evening: document.getElementById('evening-button'),
+            night: document.getElementById('night-button')
+        };
+
+        function setTheme(newTheme) {
+            if (theme === newTheme) return;
+            theme = newTheme;
+            localStorage.setItem('gardenTheme', theme);
+
+            // Update background image
+            document.getElementById('bg-image').src = imageDir + imageMap[theme];
+
+            // Update BGM
+            bgm.src = audioDir + audioMap[theme];
+            bgm.currentTime = 0;
+            bgm.load();
+            bgm.play();
+
+            // Update buttons
+            for (const t in themeButtons) {
+                themeButtons[t].disabled = (t === theme);
+            }
+        }
+
+        // Initial setup
+        function initialize() {
+            const savedTheme = localStorage.getItem('gardenTheme');
+            if (savedTheme && audioMap[savedTheme]) {
+                theme = savedTheme;
+            } else {
+                const hour = new Date().getHours();
+                if (hour >= 6 && hour < 12) {
+                    theme = 'morning';
+                } else if (hour >= 12 && hour < 17) {
+                    theme = 'midday';
+                } else if (hour >= 17 && hour < 20) {
+                    theme = 'evening';
+                } else {
+                    theme = 'night';
+                }
+            }
+
+            document.getElementById('bg-image').src = imageDir + imageMap[theme];
+            for (const t in themeButtons) {
+                themeButtons[t].disabled = (t === theme);
+            }
+
+            // BGM setup
+            let audioFile = audioMap[theme];
+            bgm = new Audio(audioDir + audioFile);
+            bgm.loop = true;
+            bgm.volume = 0.5;
+
+            const savedTime = localStorage.getItem('bgmTime');
+            if (savedTime) {
+                bgm.currentTime = parseFloat(savedTime);
+            }
+            
+            bgm.play().catch(error => console.log("Autoplay prevented: ", error));
+        }
+
+        initialize();
+
+        // Event Listeners for theme buttons
+        for (const t in themeButtons) {
+            themeButtons[t].addEventListener('click', () => setTheme(t));
+        }
+
+        // Save BGM state before leaving
+        window.addEventListener('beforeunload', function() {
+            if (bgm) {
+                localStorage.setItem('bgmTime', bgm.currentTime);
+            }
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Little Garden</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    #bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: calc(100% / 0.92);
+      object-fit: cover;
+      object-position: top;
+    }
+    .btn {
+      position: absolute;
+      padding: 10px 20px;
+      border: 2px solid #fff;
+      border-radius: 5px;
+      background-color: rgba(0,0,0,0.5);
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Arial', sans-serif;
+      font-weight: bold;
+      transition: background-color 0.3s, color 0.3s;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .btn:hover {
+      background-color: #fff;
+      color: #000;
+    }
+    #pond-button {
+      bottom: 30%;
+      left: 80%;
+      transform: translateX(-50%);
+    }
+    #table-button {
+      bottom: 40%;
+      left: 40%;
+      transform: translateX(-50%);
+    }
+    #home-button {
+      top: 50%;
+      left: 10%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+<body>
+  <img id="bg-image" src="../assets/img/mylittlegarden/mylittlegarden_daytime.png" alt="My Little Garden - Daytime">
+  <button id="pond-button" class="btn">Pond</button>
+  <button id="table-button" class="btn">Table</button>
+  <button id="home-button" class="btn">Home</button>
+
+  <audio id="bgm" loop></audio>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const bgm = document.getElementById('bgm');
+        let theme;
+
+        const audioDir = '../assets/audio/mylittlegarden/';
+        const audioMap = {
+            morning: 'bgm_garden_morning.mp3',
+            midday: 'bgm_garden_midday.mp3',
+            evening: 'bgm_garden_evening.mp3',
+            night: 'bgm_garden_night.mp3'
+        };
+
+        function updateTheme() {
+            const savedTheme = localStorage.getItem('gardenTheme');
+            if (savedTheme && audioMap[savedTheme]) {
+                theme = savedTheme;
+            } else {
+                const hour = new Date().getHours();
+                if (hour >= 6 && hour < 12) {
+                    theme = 'morning';
+                } else if (hour >= 12 && hour < 17) {
+                    theme = 'midday';
+                } else if (hour >= 17 && hour < 20) {
+                    theme = 'evening';
+                } else {
+                    theme = 'night';
+                }
+            }
+        }
+
+        function setupBgm() {
+            updateTheme();
+            let audioFile = audioMap[theme];
+            bgm.src = audioDir + audioFile;
+            
+            const savedVolume = localStorage.getItem('bgmVolume');
+            if (savedVolume) {
+                bgm.volume = parseFloat(savedVolume);
+            } else {
+                bgm.volume = 0.5;
+            }
+
+            const savedTime = localStorage.getItem('bgmTime');
+            if (savedTime) {
+                bgm.currentTime = parseFloat(savedTime);
+            }
+
+            bgm.load();
+            bgm.play().catch(error => {
+                console.log("Autoplay was prevented: ", error);
+                if (!document.getElementById('play-music-button')) {
+                    let playButton = document.createElement('button');
+                    playButton.id = 'play-music-button';
+                    playButton.textContent = 'Play Music';
+                    playButton.style.position = 'absolute';
+                    playButton.style.top = '10px';
+                    playButton.style.left = '10px';
+                    playButton.style.zIndex = '100';
+                    playButton.onclick = function() {
+                        bgm.play();
+                        playButton.style.display = 'none';
+                    };
+                    document.body.appendChild(playButton);
+                }
+            });
+        }
+
+        setupBgm();
+
+        document.getElementById('pond-button').addEventListener('click', function() {
+            window.location.href = 'video_player.html?t=' + new Date().getTime();
+        });
+
+        document.getElementById('table-button').addEventListener('click', function() {
+            window.location.href = 'garden_table.html';
+        });
+
+        document.getElementById('home-button').addEventListener('click', function() {
+            if (bgm) {
+                bgm.pause();
+                localStorage.setItem('bgmTime', bgm.currentTime);
+                localStorage.setItem('bgmVolume', bgm.volume);
+            }
+            window.location.href = 'home_enter_player.html';
+        });
+
+        window.addEventListener('beforeunload', function() {
+            if (bgm) {
+                localStorage.setItem('bgmTime', bgm.currentTime);
+                localStorage.setItem('gardenTheme', theme);
+                localStorage.setItem('bgmVolume', bgm.volume);
+            }
+        });
+    });
+  </script>
+</body>
+</html>
