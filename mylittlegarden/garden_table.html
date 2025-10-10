@@ -8,15 +8,30 @@
       padding: 0;
       height: 100%;
       overflow: hidden;
-      background-color: #000;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #aspect-ratio-container {
+      position: relative;
+      width: 100vw;
+      height: calc(100vw * 0.92);
+    }
+    @media (min-aspect-ratio: 1/0.92) {
+      #aspect-ratio-container {
+        width: calc(100vh / 0.92);
+        height: 100vh;
+      }
     }
     #bg-image {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: calc(100% / 0.92);
+      height: 100%;
       object-fit: cover;
+      object-position: top;
     }
     .control-button, .back-button {
       background-color: rgba(0, 0, 0, 0.5);
@@ -31,7 +46,8 @@
       text-decoration: none;
     }
     .control-button:hover, .back-button:hover {
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: #fff;
+      color: #000;
     }
     .control-button:disabled {
         background-color: rgba(0, 0, 0, 0.8);
@@ -44,24 +60,28 @@
       transform: translate(-50%, -50%);
       display: flex;
       gap: 10px;
+      z-index: 10;
     }
     .back-button {
       position: absolute;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
+      z-index: 10;
     }
   </style>
 </head>
 <body>
-  <img id="bg-image" src="" alt="Garden Table">
-  <div id="button-container">
-    <button id="morning-button" class="control-button">Morning</button>
-    <button id="midday-button" class="control-button">Midday</button>
-    <button id="evening-button" class="control-button">Evening</button>
-    <button id="night-button" class="control-button">Night</button>
+  <div id="aspect-ratio-container">
+    <img id="bg-image" src="" alt="Garden Table">
+    <div id="button-container">
+      <button id="morning-button" class="control-button">Morning</button>
+      <button id="midday-button" class="control-button">Midday</button>
+      <button id="evening-button" class="control-button">Evening</button>
+      <button id="night-button" class="control-button">Night</button>
+    </div>
+    <a href="index.html" class="back-button">Back</a>
   </div>
-  <a href="index.html" class="back-button">Back</a>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

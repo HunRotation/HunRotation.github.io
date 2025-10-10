@@ -14,16 +14,30 @@ layout: none
     padding: 0;
     height: 100%;
     overflow: hidden;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #aspect-ratio-container {
+    position: relative;
+    width: 100vw;
+    height: calc(100vw * 0.92);
+  }
+  @media (min-aspect-ratio: 1/0.92) {
+    #aspect-ratio-container {
+      width: calc(100vh / 0.92);
+      height: 100vh;
+    }
   }
   #bg-image {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100% / 0.92);
+    height: 100%;
     object-fit: cover;
     object-position: top;
-    z-index: -1;
   }
   .diary-text-field {
     position: absolute;
@@ -41,6 +55,7 @@ layout: none
     line-height: 1.6;
     color: #333;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    z-index: 10;
   }
   .btn {
     position: absolute;
@@ -69,17 +84,19 @@ layout: none
 </head>
 <body>
 
-<img id="bg-image" src="../assets/img/mylittlegarden/house_diary.png" alt="My Little Garden - Diary">
+<div id="aspect-ratio-container">
+  <img id="bg-image" src="../assets/img/mylittlegarden/house_diary.png" alt="My Little Garden - Diary">
 
-<div class="diary-text-field">
-  <p><strong>October 10, 2025</strong></p>
-  <p>Finally, my own garden is complete. The small hill I've always dreamed of, a quiet place to spend the rest of my life, is now a reality before my very eyes. It's a moment that makes me truly grateful for the advancement of technology. As if to celebrate the completion of my sanctuary, the autumn sunlight warmly embraces me here in the middle of the green forest.</p>
-  <p>I've dedicated my entire life to helping people enjoy a more convenient and personalized musical experience. Thanks to that work, countless people can now feel and enjoy their emotions anytime, with the music they desire. And now, I want to use that effort for myself. The speakers here change the music according to my mood, the situation, or my spoken requests, sometimes even composing something new. The thought that sounds filled with my own emotions will continuously wrap around and echo in this small space fills my heart with an inexplicable sense of being moved.</p>
+  <div class="diary-text-field">
+    <p><strong>October 10, 2025</strong></p>
+    <p>Finally, my own garden is complete. The small hill I've always dreamed of, a quiet place to spend the rest of my life, is now a reality before my very eyes. It's a moment that makes me truly grateful for the advancement of technology. As if to celebrate the completion of my sanctuary, the autumn sunlight warmly embraces me here in the middle of the green forest.</p>
+    <p>I've dedicated my entire life to helping people enjoy a more convenient and personalized musical experience. Thanks to that work, countless people can now feel and enjoy their emotions anytime, with the music they desire. And now, I want to use that effort for myself. The speakers here change the music according to my mood, the situation, or my spoken requests, sometimes even composing something new. The thought that sounds filled with my own emotions will continuously wrap around and echo in this small space fills my heart with an inexplicable sense of being moved.</p>
+  </div>
+
+  <a href="home.html" id="back-button" class="btn">Back</a>
 </div>
 
 <audio id="bgm" loop></audio>
-
-<a href="home.html" id="back-button" class="btn">Back</a>
 
 <script>
   const bgm = document.getElementById('bgm');
