@@ -8,13 +8,28 @@
       padding: 0;
       height: 100%;
       overflow: hidden;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #aspect-ratio-container {
+      position: relative;
+      width: 100vw;
+      height: calc(100vw * 0.92);
+    }
+    @media (min-aspect-ratio: 1/0.92) {
+      #aspect-ratio-container {
+        width: calc(100vh / 0.92);
+        height: 100vh;
+      }
     }
     #bg-image {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: calc(100% / 0.92);
+      height: 100%;
       object-fit: cover;
       object-position: top;
     }
@@ -54,10 +69,12 @@
   </style>
 </head>
 <body>
-  <img id="bg-image" src="../assets/img/mylittlegarden/mylittlegarden_daytime.png" alt="My Little Garden - Daytime">
-  <button id="pond-button" class="btn">Pond</button>
-  <button id="table-button" class="btn">Table</button>
-  <button id="home-button" class="btn">Home</button>
+  <div id="aspect-ratio-container">
+    <img id="bg-image" src="../assets/img/mylittlegarden/mylittlegarden_daytime.png" alt="My Little Garden - Daytime">
+    <button id="pond-button" class="btn">Pond</button>
+    <button id="table-button" class="btn">Table</button>
+    <button id="home-button" class="btn">Home</button>
+  </div>
 
   <audio id="bgm" loop></audio>
 
