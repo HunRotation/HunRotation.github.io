@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(function(){const e=document.getElementById("openhouseVideo");e&&e.addEventListener("ended",(function(){window.location.href="home.html"}),!1)}));

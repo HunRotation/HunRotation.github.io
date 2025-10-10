@@ -1,0 +1,24 @@
+<!DOCTYPE html> <html> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <title>My Little Garden - Home</title> <style>body,html{margin:0;padding:0;height:100%;overflow:hidden}#bg-image{position:absolute;top:0;left:0;width:100%;height:calc(100% / .92);object-fit:cover;object-position:top;z-index:-1}.btn{background-color:rgba(0,0,0,0.5);color:white;border:0;border-radius:15px;padding:10px 20px;font-size:16px;font-family:sans-serif;cursor:pointer;transition:background-color .3s;text-decoration:none}.btn:hover{background-color:#fff;color:#000}#back-button{position:absolute;bottom:20px;left:50%;transform:translateX(-50%)}#diary-button{position:absolute;top:60%;left:65%;transform:translateX(-50%)}</style> </head> <body> <img id="bg-image" src="../assets/img/mylittlegarden/house_room.png" alt="My Little Garden - Home"> <audio id="bgm" autoplay loop> <source src="../assets/audio/mylittlegarden/bgm_room_default.mp3" type="audio/mpeg"> Your browser does not support the audio element. </source></audio> <a href="index.html?from=home" id="back-button" class="btn">Back</a> <a href="diary.html" id="diary-button" class="btn">Diary</a> <script>
+  const bgm = document.getElementById('bgm');
+  const savedVolume = localStorage.getItem('bgmVolume');
+  if (savedVolume) {
+    bgm.volume = parseFloat(savedVolume);
+  }
+
+  const savedRoomBgmTime = localStorage.getItem('roomBgmTime');
+  if (savedRoomBgmTime) {
+    bgm.currentTime = parseFloat(savedRoomBgmTime);
+  }
+  bgm.play();
+
+  document.getElementById('back-button').addEventListener('click', (e) => {
+    localStorage.setItem('bgmTime', bgm.currentTime);
+  });
+
+  document.getElementById('diary-button').addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.setItem('roomBgmSrc', bgm.querySelector('source').src);
+    localStorage.setItem('roomBgmTime', bgm.currentTime);
+    window.location.href = e.target.href;
+  });
+</script> </body> </html>
