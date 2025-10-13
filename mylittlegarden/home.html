@@ -81,7 +81,13 @@ layout: none
 
 <script>
   const bgm = document.getElementById('bgm');
+  const savedBgmSrc = localStorage.getItem('roomBgmSrc');
   const savedVolume = localStorage.getItem('bgmVolume');
+
+  if (savedBgmSrc) {
+    bgm.src = savedBgmSrc;
+  }
+
   if (savedVolume) {
     bgm.volume = parseFloat(savedVolume);
   }
@@ -90,7 +96,7 @@ layout: none
   if (savedRoomBgmTime) {
     bgm.currentTime = parseFloat(savedRoomBgmTime);
   }
-  bgm.play();
+  bgm.play().catch(e => console.error("BGM autoplay failed:", e));
 
   document.getElementById('back-button').addEventListener('click', (e) => {
     localStorage.setItem('bgmTime', bgm.currentTime);
@@ -98,7 +104,7 @@ layout: none
 
   document.getElementById('diary-button').addEventListener('click', (e) => {
     e.preventDefault();
-    localStorage.setItem('roomBgmSrc', bgm.querySelector('source').src);
+    localStorage.setItem('roomBgmSrc', bgm.src);
     localStorage.setItem('roomBgmTime', bgm.currentTime);
     window.location.href = e.target.href;
   });
