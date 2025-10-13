@@ -25,6 +25,14 @@ app.add_middleware(
 class MusicRequest(BaseModel):
     text: str
 
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the music generation API"}
+
+@app.get("/api/generate-music")
+def read_generate_music():
+    return {"message": "This endpoint expects a POST request with a JSON body containing a 'text' field."}
+
 
 @app.post("/api/generate-music")
 def generate_music_api(request_body: MusicRequest):
