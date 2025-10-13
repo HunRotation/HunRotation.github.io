@@ -10,7 +10,15 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/api/generate_music",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/generate-music",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/",
       "dest": "/api/index.py"
     }
   ]

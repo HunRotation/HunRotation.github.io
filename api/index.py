@@ -62,7 +62,7 @@ def generate_music_api(request_body: MusicRequest):
         client = ElevenLabs(api_key=api_key)
         audio_stream = client.music.compose(
             prompt=request_body.text,
-            music_length_ms=60000  # 60 seconds
+            music_length_ms=30000,  # 60 seconds
         )
         return StreamingResponse(audio_stream, media_type="audio/mpeg")
 
