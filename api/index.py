@@ -26,33 +26,7 @@ class MusicRequest(BaseModel):
     text: str
 
 
-@app.post("/generate-music")
-def generate_music(request_body: MusicRequest):
-    api_key = os.getenv("ELEVENLABS_API_KEY")
-    if not api_key:
-        raise HTTPException(status_code=500, detail="API key not found.")
-
-    try:
-        client = ElevenLabs(api_key=api_key)
-
-        # Generate music using the SDK
-        audio_stream = client.music.compose(
-            prompt=request_body.text,
-            force_instrumental=True,
-            music_length_ms=30000,  # 60 seconds
-        )
-
-        # Stream the audio back to the client
-        return StreamingResponse(audio_stream, media_type="audio/mpeg")
-
-    except Exception as e:
-        print(f"Error calling ElevenLabs API: {e}")
-        raise HTTPException(
-            status_code=500, detail=f"Error from music generation API: {str(e)}"
-        )
-
-
-@app.post("/api/generate_music")
+@app.post("/api/generate-music")
 def generate_music_api(request_body: MusicRequest):
     api_key = os.getenv("ELEVENLABS_API_KEY")
     if not api_key:
@@ -62,7 +36,7 @@ def generate_music_api(request_body: MusicRequest):
         client = ElevenLabs(api_key=api_key)
         audio_stream = client.music.compose(
             prompt=request_body.text,
-            music_length_ms=60000  # 60 seconds
+            music_length_ms=30000,  # 30 seconds
         )
         return StreamingResponse(audio_stream, media_type="audio/mpeg")
 
