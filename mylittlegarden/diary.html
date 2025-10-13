@@ -202,7 +202,7 @@ layout: none
 
             const text = `An indoors background music that best fits the following text: "${content}"`;
 
-            fetch('https://hunrotation.github.io/api/generate-music', {
+            fetch('/api/generate-music', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -210,8 +210,7 @@ layout: none
                 body: JSON.stringify({
                     text: text,
                 })
-            })
-            .then(response => {
+            })            .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
