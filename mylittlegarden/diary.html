@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <title>My Little Garden - Diary</title> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&amp;display=swap" rel="stylesheet"> <style>body,html{margin:0;padding:0;height:100%;overflow:hidden;background:#000;display:flex;justify-content:center;align-items:center}#aspect-ratio-container{position:relative;width:100vw;height:calc(100vw * .92)}@media(min-aspect-ratio:1/0.92){#aspect-ratio-container{width:calc(100vh / .92);height:100vh}}#bg-image{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:top}.diary-text-field{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60%;height:70%;background-color:#f5f5dc;border:1px solid #aaa;padding:20px;overflow-y:auto;font-family:'Caveat',cursive;font-size:1.5em;line-height:1.6;color:#333;box-shadow:0 0 10px rgba(0,0,0,0.2);z-index:10}.btn{position:absolute;background-color:rgba(0,0,0,0.5);color:white;border:0;border-radius:15px;padding:10px 20px;font-size:16px;font-family:sans-serif;cursor:pointer;transition:background-color .3s;text-decoration:none;z-index:10}.btn:hover{background-color:#fff;color:#000}#back-button{bottom:20px;left:50%;transform:translateX(-50%)}</style> </head> <body> <div id="aspect-ratio-container"> <img id="bg-image" src="../assets/img/mylittlegarden/house_diary.png" alt="My Little Garden - Diary"> <div class="diary-text-field"> <p><strong>October 10, 2025</strong></p> <p>Finally, my own garden is complete. The small hill I've always dreamed of, a quiet place to spend the rest of my life, is now a reality before my very eyes. It's a moment that makes me truly grateful for the advancement of technology. As if to celebrate the completion of my sanctuary, the autumn sunlight warmly embraces me here in the middle of the green forest.</p> <p>I've dedicated my entire life to helping people enjoy a more convenient and personalized musical experience. Thanks to that work, countless people can now feel and enjoy their emotions anytime, with the music they desire. And now, I want to use that effort for myself. The speakers here change the music according to my mood, the situation, or my spoken requests, sometimes even composing something new. The thought that sounds filled with my own emotions will continuously wrap around and echo in this small space fills my heart with an inexplicable sense of being moved.</p> </div> <a href="home.html" id="back-button" class="btn">Back</a> </div> <audio id="bgm" loop></audio> <script>
+<!DOCTYPE html> <html> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <title>My Little Garden - Diary</title> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&amp;display=swap" rel="stylesheet"> <style>body,html{margin:0;padding:0;height:100%;overflow:hidden;background:#000;display:flex;justify-content:center;align-items:center}#aspect-ratio-container{position:relative;width:100vw;height:calc(100vw * .92)}@media(min-aspect-ratio:1/0.92){#aspect-ratio-container{width:calc(100vh / .92);height:100vh}}#bg-image{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:top}.diary-text-field{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60%;height:70%;background-color:#f5f5dc;border:1px solid #aaa;padding:20px;overflow-y:auto;font-family:'Caveat',cursive;font-size:1.5em;line-height:1.6;color:#333;box-shadow:0 0 10px rgba(0,0,0,0.2);z-index:10}.btn{position:absolute;background-color:rgba(0,0,0,0.5);color:white;border:0;border-radius:15px;padding:10px 20px;font-size:16px;font-family:sans-serif;cursor:pointer;transition:background-color .3s;text-decoration:none;z-index:10}.btn:hover{background-color:#fff;color:#000}#back-to-home-button{bottom:20px;left:20px}#save-button{bottom:20px;right:20px}.arrow-btn{top:50%;transform:translateY(-50%)}#left-arrow{left:20px}#right-arrow{right:20px}.diary-edit{width:100%;height:80%;background-color:transparent;border:0;font-family:inherit;font-size:inherit;line-height:inherit;color:inherit;resize:none}#home-button{bottom:20px;left:50%;transform:translateX(-50%)}</style> </head> <body> <div id="aspect-ratio-container"> <img id="bg-image" src="../assets/img/mylittlegarden/house_diary.png" alt="My Little Garden - Diary"> <div class="diary-page" id="page-0"> <div class="diary-text-field"> <p><strong>October 10, 2025</strong></p> <p>Finally, my own garden is complete. The small hill I've always dreamed of, a quiet place to spend the rest of my life, is now a reality before my very eyes. It's a moment that makes me truly grateful for the advancement of technology. As if to celebrate the completion of my sanctuary, the autumn sunlight warmly embraces me here in the middle of the green forest.</p> <p>I've dedicated my entire life to helping people enjoy a more convenient and personalized musical experience. Thanks to that work, countless people can now feel and enjoy their emotions anytime, with the music they desire. And now, I want to use that effort for myself. The speakers here change the music according to my mood, the situation, or my spoken requests, sometimes even composing something new. The thought that sounds filled with my own emotions will continuously wrap around and echo in this small space fills my heart with an inexplicable sense of being moved.</p> </div> </div> <a href="home.html" id="home-button" class="btn">Back to Home</a> <button id="left-arrow" class="arrow-btn btn">◀</button> <button id="right-arrow" class="arrow-btn btn">▶</button> </div> <audio id="bgm" loop></audio> <script>
   const bgm = document.getElementById('bgm');
   const savedBgmSrc = localStorage.getItem('roomBgmSrc');
   const savedBgmTime = localStorage.getItem('roomBgmTime');
@@ -16,7 +16,170 @@
 
   bgm.play().catch(e => console.error("BGM autoplay failed: ", e));
 
-  document.getElementById('back-button').addEventListener('click', () => {
+  document.getElementById('home-button').addEventListener('click', () => {
     localStorage.setItem('roomBgmTime', bgm.currentTime);
+    localStorage.setItem('lastDiaryPage', currentPage);
   });
+
+  let currentPage = 0;
+  let pages = [document.getElementById('page-0')];
+
+  function showPage(pageIndex) {
+    pages.forEach((page, index) => {
+      page.style.display = index === pageIndex ? 'block' : 'none';
+    });
+
+    const leftArrow = document.getElementById('left-arrow');
+    const rightArrow = document.getElementById('right-arrow');
+    const homeButton = document.getElementById('home-button');
+
+    leftArrow.style.display = pageIndex > 0 ? 'block' : 'none';
+    rightArrow.style.display = 'block';
+    homeButton.style.display = pageIndex === 0 ? 'block' : 'none';
+
+    const oldBackButton = document.getElementById('back-to-home-button');
+    if(oldBackButton) oldBackButton.remove();
+    const oldSaveButton = document.getElementById('save-button');
+    if(oldSaveButton) oldSaveButton.remove();
+
+    if (pageIndex > 0) {
+      if (localStorage.getItem('diary-page-' + pageIndex) !== null) {
+        const backToHomeButton = document.createElement('a');
+        backToHomeButton.id = 'back-to-home-button';
+        backToHomeButton.className = 'btn';
+        backToHomeButton.innerText = 'Back to Home';
+        backToHomeButton.href = 'home.html';
+        backToHomeButton.addEventListener('click', () => {
+          localStorage.setItem('lastDiaryPage', pageIndex);
+        });
+        pages[pageIndex].appendChild(backToHomeButton);
+      }
+
+      const saveButton = document.createElement('button');
+      saveButton.id = 'save-button';
+      saveButton.className = 'btn';
+      saveButton.innerText = 'Save';
+      saveButton.addEventListener('click', () => {
+        const content = pages[pageIndex].querySelector('.diary-edit').value;
+        const oldContent = localStorage.getItem('diary-page-' + pageIndex);
+
+        if (content !== oldContent) {
+            localStorage.setItem('diary-page-' + pageIndex, content);
+            alert('Diary saved! Preparing a new background music for you...');
+
+            const text = `An indoors background music that best fits the following text: "${content}"`;
+
+            fetch('/api/generate-music', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    text: text,
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const dataUrl = e.target.result;
+                    bgm.src = dataUrl;
+                    bgm.play();
+                    localStorage.setItem('roomBgmSrc', dataUrl);
+                };
+                reader.readAsDataURL(blob);
+            })
+            .catch(error => {
+                console.error('Error generating music:', error);
+                alert("Ahh, seems like the speaker doesn't work. Please try again later.");
+            });
+        } else {
+            alert('Diary saved!');
+        }
+
+        rightArrow.style.display = 'block';
+        showPage(pageIndex);
+      });
+      pages[pageIndex].appendChild(saveButton);
+
+      if (localStorage.getItem('diary-page-' + pageIndex) === null) {
+        rightArrow.style.display = 'none';
+      }
+    }
+  }
+
+  function createNewPage() {
+    const newPageIndex = pages.length;
+    const newPage = document.createElement('div');
+    newPage.className = 'diary-page';
+    newPage.id = 'page-' + newPageIndex;
+    newPage.style.display = 'none';
+
+    const diaryTextField = document.createElement('div');
+    diaryTextField.className = 'diary-text-field';
+
+    const date = new Date();
+    const dateString = date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    const p = document.createElement('p');
+    p.innerHTML = '<strong>' + dateString + '</strong>';
+
+    const textarea = document.createElement('textarea');
+    textarea.className = 'diary-edit';
+
+    diaryTextField.appendChild(p);
+    diaryTextField.appendChild(textarea);
+    newPage.appendChild(diaryTextField);
+
+    document.getElementById('aspect-ratio-container').appendChild(newPage);
+    pages.push(newPage);
+
+    return newPage;
+  }
+
+  document.getElementById('left-arrow').addEventListener('click', () => {
+    if (currentPage > 0) {
+      currentPage--;
+      showPage(currentPage);
+    }
+  });
+
+  document.getElementById('right-arrow').addEventListener('click', () => {
+    currentPage++;
+    if (currentPage >= pages.length) {
+        createNewPage();
+    }
+    showPage(currentPage);
+  });
+
+  for (let i = 1; ; i++) {
+    const savedContent = localStorage.getItem('diary-page-' + i);
+    if (savedContent !== null) {
+      const newPage = createNewPage();
+      newPage.querySelector('.diary-edit').value = savedContent;
+    } else {
+      break;
+    }
+  }
+
+  const lastPage = localStorage.getItem('lastDiaryPage');
+  if (lastPage) {
+    currentPage = parseInt(lastPage, 10);
+    if(currentPage >= pages.length) {
+        currentPage = pages.length - 1;
+    }
+    localStorage.removeItem('lastDiaryPage');
+  }
+
+  showPage(currentPage);
+
 </script> </body> </html>
