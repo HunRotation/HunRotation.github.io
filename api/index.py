@@ -13,13 +13,9 @@ load_dotenv(dotenv_path=dotenv_path)
 app = FastAPI()
 
 # Configure CORS
-origins = [
-    "https://hunrotation.github.io",
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -29,17 +25,13 @@ app.add_middleware(
 class MusicRequest(BaseModel):
     text: str
 
-
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the music generation API"}
 
-
 @app.get("/api/generate-music")
 def read_generate_music():
-    return {
-        "message": "This endpoint expects a POST request with a JSON body containing a 'text' field."
-    }
+    return {"message": "This endpoint expects a POST request with a JSON body containing a 'text' field."}
 
 
 @app.post("/api/generate-music")
@@ -58,6 +50,4 @@ def generate_music_api(request_body: MusicRequest):
 
     except Exception as e:
         print(f"Error calling ElevenLabs API: {e}")
-        raise HTTPException(
-            status_code=500, detail=f"Error from music generation API: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error from music generation API: {str(e)}")
