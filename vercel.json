@@ -1,1 +1,1 @@
-{"builds":[{"src":"api/index.py","use":"@vercel/python"},{"src":"mylittlegarden/diary.html","use":"@vercel/static"}],"routes":[{"src":"/api/(.*)","dest":"api/index.py"},{"src":"/mylittlegarden/diary.html","dest":"/mylittlegarden/diary.html"}]}
+{"builds":[{"src":"api/index.py","use":"@vercel/python"},{"src":"mylittlegarden/diary.html","use":"@vercel/static"}],"routes":[{"src":"/api/(.*)","dest":"/api/index.py"},{"src":"/","dest":"/mylittlegarden/diary.html"}]}

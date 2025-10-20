@@ -65,7 +65,7 @@
 
         if (content !== oldContent) {
             localStorage.setItem('diary-page-' + pageIndex, content);
-            alert('Diary saved! Preparing a new background music for you...');
+            alert('Diary saved!');
 
             const text = `An indoors background music that best fits the following text: "${content}"`;
 
@@ -95,7 +95,7 @@
             })
             .catch(error => {
                 console.error('Error generating music:', error);
-                alert("Ahh, seems like the speaker doesn't work. Please try again later.");
+                // alert("Ahh, seems like the speaker doesn't work. Please try again later.");
             });
         } else {
             alert('Diary saved!');
