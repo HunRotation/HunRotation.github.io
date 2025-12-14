@@ -14,7 +14,7 @@
         rel="stylesheet">
     <!-- Modules (ES6) -->
     <!-- Modules (ES6) -->
-    <script type="module" src="js/main.js?v=27"></script>
+    <script type="module" src="js/main.js?v=30"></script>
 </head>
 
 <body>
@@ -33,8 +33,13 @@
             </div>
         </div>
 
-        <textarea id="debug-log"
-            style="position: fixed; bottom: 10px; left: 10px; width: 300px; height: 150px; z-index: 1000; opacity: 0.8;"></textarea>
+        <div id="station-list-panel">
+            <h3>Active Stations</h3>
+            <div id="station-list-content">
+                <div class="empty-state">Click stations to enable</div>
+            </div>
+        </div>
+
 
         <div id="controls">
             <h1>SonicMetro</h1>
