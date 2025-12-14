@@ -1,0 +1,169 @@
+:root {
+    --primary-color: #0052A4;
+    /* Line 1 Color */
+    --bg-color: #f5f5f5;
+    --panel-bg: rgba(255, 255, 255, 0.9);
+    --text-color: #333;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#map-container {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    background-color: #e0e0e0;
+    cursor: grab;
+}
+
+#map-container:active {
+    cursor: grabbing;
+}
+
+#controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 250px;
+    background: var(--panel-bg);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+h1 {
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+#clock {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-variant-numeric: tabular-nums;
+}
+
+.control-group {
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #003d7a;
+}
+
+input[type=range] {
+    width: 100%;
+}
+
+/* SVG Styles */
+.station-marker {
+    fill: white;
+    stroke: #333;
+    stroke-width: 1px;
+}
+
+.station-label {
+    font-size: 10px;
+    fill: #333;
+    pointer-events: none;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.train-marker {
+    width: 8px;
+    height: 8px;
+    stroke: white;
+    stroke-width: 1px;
+    transition: transform 0.1s linear;
+    /* Smooth movement? D3 handles this better */
+}
+
+/* Clean up CSS */
+#left-panel {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    width: 300px;
+    background: var(--panel-bg);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#day-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#day-toggle {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+#time-group {
+    display: flex;
+    flex-direction: column;
+}
+
+#time-slider {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+#time-display-left {
+    font-weight: 700;
+    text-align: center;
+    margin-top: 5px;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    font-variant-numeric: tabular-nums;
+}
