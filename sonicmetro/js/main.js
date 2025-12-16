@@ -37,12 +37,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const dayToggle = document.getElementById('day-toggle');
     const timeSlider = document.getElementById('time-slider');
+    const loadingMsg = document.getElementById('chuck-loading-msg');
 
     // Controls - Initialize listeners early
     // Controls - Initialize listeners early
     playBtn.addEventListener('click', async () => {
+        if (!soundManager.isReady) {
+            if (loadingMsg) {
+                loadingMsg.textContent = "WebChucK is loading...";
+                loadingMsg.style.opacity = 1;
+            }
+            await soundManager.init(); // Init on user gesture
+
+            if (loadingMsg && soundManager.isReady) {
+                loadingMsg.textContent = "WebChucK loaded!";
+                setTimeout(() => {
+                    loadingMsg.style.opacity = 0;
+                }, 5000);
+            }
+        }
         isPlaying = true;
-        await soundManager.init(); // Init on user gesture
     });
     pauseBtn.addEventListener('click', () => isPlaying = false);
 
