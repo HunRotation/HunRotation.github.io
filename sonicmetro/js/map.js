@@ -131,11 +131,11 @@ export class SubwayMap {
         this.scaleFactor = this.mapW / BASE_RES;
         console.log(`Coordinate Scaling Factor: ${this.scaleFactor.toFixed(2)}`);
 
-        // Helper to add line info if missing (though stations.js acts as source of truth for lines)
+        // Helper to add line info if missing
         const process = (stations, lineName) => stations.map(s => ({
             ...s,
-            name: s.name.normalize('NFC'), // Normalize for safety
-            line: lineName, // Attach line info effectively
+            name: s.name.normalize('NFC'),
+            line: lineName,
             x: s.x * this.scaleFactor,
             y: s.y * this.scaleFactor
         }));
@@ -244,12 +244,10 @@ export class SubwayMap {
         const groups = {};
         const linesOrder = ["1호선", "2호선", "3호선", "4호선", "5호선", "6호선", "7호선", "8호선", "9호선", "경의중앙선"];
 
-        // Iterate all active stations
-        // We need to iterate ALL stations to find which lines the enabled names belong to
+        // Iterate all stations to find which lines the active stations belong to
         this.allStations.forEach(s => {
             if (this.enabledStations.has(s.name)) {
                 if (!groups[s.line]) groups[s.line] = [];
-                // Avoid duplicates if data has multiple entries for same station on same line (unlikely but safe)
                 if (!groups[s.line].includes(s.name)) {
                     groups[s.line].push(s.name);
                 }
@@ -299,13 +297,6 @@ export class SubwayMap {
     }
 
     toggleLine(lineName) {
-        // Find basic line name (e.g. "2호선")
-        // lineName might be "line-2-main" or similar from class, or just "2호선"
-        /*
-           We will use a mapping or logic.
-           Ref to getTrainColor logic:
-           Lines are 1호선..9호선.
-        */
         if (this.disabledLines.has(lineName)) {
             this.disabledLines.delete(lineName);
         } else {
@@ -313,10 +304,8 @@ export class SubwayMap {
         }
         // Re-render everything affected
         this.renderConnections();
-        this.renderActiveStationsList(); // Update panel to show disabled status
-        this.renderTrains([]); // Temporary clear or just let next frame handle it?
-        // Actually, main loop handles train rendering. We just need connections update.
-        // We should trigger a re-render of trains next frame.
+        this.renderActiveStationsList();
+        this.renderTrains([]);
     }
 
     resetStations() {
@@ -349,44 +338,7 @@ export class SubwayMap {
         const R_SEL = 6 * this.scaleFactor; // Bigger for enabled
         const STROKE = 1.5 * this.scaleFactor;
 
-        // Filter for unique stations to check clicking issues
-        // We prefer the one that appears first or just any, as coordinates are seemingly identical for interchanges
-        // Actually, coordinates might differ slightly for some interchanges? 
-        // For '종로3가', they are identical in stations.js (941, 593) for L1.
-        // Let's verify L3/L5 coords in stations.js... 
-        // L3: (942, 584) -> DIFFERENT!
-        // L5: (941, 605) -> DIFFERENT!
-        // Ah! They are NOT stacked perfectly. They are adjacent cluster.
-        // So user sees 3 dots?
-        // If user sees 3 dots, they must click ALL 3 to disable?
-        // NO. `toggleStation` uses `name`.
-        // If I click L1 dot -> `enabledStations` loses "종로3가".
-        // L3 dot re-renders. Check `enabledStations.has("종로3가")` -> False. It turns white.
-        // L5 dot re-renders. It turns white.
 
-        // ISSUE: If I click L1 dot. It turns white.
-        // Then I click L3 dot (which is now white).
-        // It calls `toggleStation("종로3가")`.
-        // "종로3가" is not in Set. So it ADDS it back.
-        // So clicking ANY of the 3 dots toggles the GLOBAL state for that name.
-
-        // This seems correct behavior for "Toggle by Name".
-        // Why did the user feel it wasn't valid?
-        // Maybe they clicked L1 (Disabled), then accidentally clicked L2 (Enabled)?
-        // Or maybe they thought "I disabled THIS dot" but another dot nearby started flashing?
-        // Actually, arrival event checks `enabledStations.has(stationName)`.
-        // If ANY dot is enabled, sound plays.
-
-        // WAIT. If I disable "종로3가", ALL 3 dots turn white.
-        // Visually, it looks disabled.
-        // But sound plays?
-        // This implies `enabledStations` HAS "종로3가".
-        // Which implies the user toggled it ON again.
-
-        // Is it possible the Click event is bubbling to the map container?
-        // We have `e.stopPropagation()`.
-
-        // Maybe Debounce?
 
         this.layerStations.selectAll(".station-marker")
             .data(stations) // We keep all stations so they display correctly at their specific line positions
@@ -416,9 +368,6 @@ export class SubwayMap {
         const pathGroup = this.layerConnections; // Work directly on the group
 
         const drawPath = (rawBranch, className, color) => {
-            // Determine Line Name from color/context effectively?
-            // Actually, we pass className like "line-gyeongwon". 
-            // We need to map this to "1호선" etc to check disabledLines.
             let lineKey = "1호선"; // Default
             if (className.includes("line-2")) lineKey = "2호선";
             if (className.includes("line-3")) lineKey = "3호선";
@@ -579,14 +528,8 @@ export class SubwayMap {
 
         // If line is provided, try to get specific coords
         if (line) {
-            // 1. Unambiguous Exact Match (Fastest)
             if (entry[line]) return entry[line];
-
-            // 2. Partial Match (e.g. "경의중앙선" vs "line-gyeongui" or "1호선" vs "line-gyeongin")
-            // We need to match the key stored in stationMap (which are normalized line names)
-            // with the `line` arg which might come from data (e.g. "1호선") or class (e.g. "line-1").
-
-            // Iterate keys to find partial match
+            // Partial Match
             for (const key of Object.keys(entry)) {
                 if (line.includes(key) || key.includes(line)) {
                     return entry[key];
@@ -594,17 +537,8 @@ export class SubwayMap {
             }
         }
 
-        // Fallback: If no line provided or no match found (e.g. Transfer station with one shared node?)
-        // For distinct stations like Yangpyeong, we MUST preserve distinction.
-        // If line was provided but not found, returning values[0] is RISKY if names collide.
-        // BUT for interchange stations (e.g. Seoul Station), usually just one dot is fine/shared.
-        // For Yangpyeong, they are far apart.
-
-        // Strategy: 
-        // If the station name has multiple entries (collision), AND we failed to match the line:
-        // defaulting to index 0 is bad.
-        // However, standard transfers usually share coords (or are close).
-        // Let's rely on the caller passing correct line.
+        // Fallback: If no line provided or no match found
+        // For interchange stations, typically use first entry
 
         /*
         if (name === "양평") {

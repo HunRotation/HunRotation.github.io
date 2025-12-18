@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const loadingMsg = document.getElementById('chuck-loading-msg');
 
     // Controls - Initialize listeners early
-    // Controls - Initialize listeners early
     playBtn.addEventListener('click', async () => {
         if (!soundManager.isReady) {
             if (loadingMsg) {
@@ -104,8 +103,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         simulationTime = parseFloat(e.target.value);
         updateClock();
 
-        // Sync Event Index (Binary Search or Linear)
-        // Simple Linear for now as performance is likely fine
+        // Sync Event Index
         nextEventIndex = arrivalEvents.findIndex(ev => ev.time > simulationTime);
         if (nextEventIndex === -1) nextEventIndex = arrivalEvents.length;
 
@@ -136,7 +134,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Data Manager
-    // Data Manager
     dataManager.loadAllData().then(() => {
         console.log(`Initialized with ${dataManager.trains.size} trains.`);
 
@@ -154,11 +151,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (train.dayType !== currentDayType) continue; // Filter by day
             if (!train.schedule) continue;
             train.schedule.forEach(stop => {
-                // We use arrival time. If undefined (first station), use departure?
-                // Actually usually arrival is defined except start. 
-                // We want sound on arrival.
                 if (stop.arrivalSeconds) {
-                    // console.log("Added Event:", stop); // Debug
                     events.push({
                         time: stop.arrivalSeconds, // Use numeric seconds!
                         line: train.line,
@@ -297,17 +290,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 while (nextEventIndex < arrivalEvents.length && arrivalEvents[nextEventIndex].time <= simulationTime) {
                     const ev = arrivalEvents[nextEventIndex];
 
-                    // debug logging for first few events
-                    if (nextEventIndex % 50 === 0) {
-                        console.log("Checking Event:", ev, "Enabled:", map.enabledStations.has(ev.station));
-                    }
 
-                    // Trigger Logic
-                    // 1. Check if station enabled
-                    // 2. Check if line enabled
-
-                    // Track consecutive enabled stations
-                    // trainStates is defined in outer scope
 
                     if (!map.disabledLines.has(ev.line)) {
                         const state = trainStates.get(ev.trainId) || { count: 0 };
@@ -316,20 +299,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                             state.count++;
 
                             // Determine Direction Step
-                            // Get train direction from dataManager
                             const trainData = dataManager.trains.get(ev.trainId);
                             let direction = trainData ? trainData.direction : "상행";
 
-                            // Direction mapping
-                            // Up/Inner (상행, 내선) -> Positive
-                            // Down/Outer (하행, 외선) -> Negative
-                            const isPositive = (direction === "상행" || direction === "내선") || (trainData && trainData.line === "6호선"); // Line 6 acts as loop/one-way effectively? Check data.
-                            // Actually Line 6 is "상행" for loop. "하행" is entering? 
-                            // data.js says: if 6호선 -> direction = "상행". So always positive. Correct.
+                            // Up/Inner (상행, 내선) -> Positive, Down/Outer (하행, 외선) -> Negative
+                            // Line 6 is typically "상행" for loop, so positive.
+                            const isPositive = (direction === "상행" || direction === "내선") || (trainData && trainData.line === "6호선");
 
-                            // Modulo 8 logic (0 to 7)
                             let stepIndex = (state.count - 1) % 8;
-
                             let pitchStep = isPositive ? stepIndex : -stepIndex;
 
                             // Play Sound with Pitch Step

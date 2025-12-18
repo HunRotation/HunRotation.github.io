@@ -98,24 +98,14 @@ export class DataManager {
             // Group by lnkgTrainno if available, else trainno
             let id = row.lnkgTrainno;
 
-            // SPECIAL: Line 6 Link Logic
-            // Up (Sinnae->Eungam) lnkgTrainno points to the Loop/Down train.
-            // Down (Loop->Sinnae) trainno IS that number.
-            // Down's lnkgTrainno points to next Up, which we don't care about merging as much.
-            // So for Line 6:
-            // Up: Use lnkgTrainno
-            // Down: Use trainno
+            // Line 6 Link Logic: Up (Sinnae->Eungam) uses lnkgTrainno, Down uses trainno
             if (row.lineNm === "6호선") {
                 if (row.upbdnbSe === "하행") {
                     id = row.trainno;
                 }
-                // If Up, keep using lnkgTrainno (default)
             }
 
-            // SPECIAL: Line 1 Separation Logic
-            // Line 1 data has inconsistent lnkgTrainno (some parts empty, some parts linked to other trains).
-            // But trainno is consistent (e.g. K1903) across the whole journey.
-            // We force trainno for Line 1 to prevent schedule splitting which causes "teleporting" gaps.
+            // Line 1 Separation Logic: force trainno to prevent schedule splitting
             if (row.lineNm === "1호선") {
                 id = row.trainno;
             }
@@ -129,7 +119,6 @@ export class DataManager {
 
             if (!id) return;
 
-            // composite key to separate Weekday/Weekend AND Line (to avoid 2호선 vs 5호선 collision)
             // composite key to separate Weekday/Weekend AND Line (to avoid 2호선 vs 5호선 collision)
             let lineKeyVal = row.lineNm;
             if (lineKeyVal === "경의선" || lineKeyVal === "중앙선") lineKeyVal = "경의중앙선";
@@ -150,7 +139,8 @@ export class DataManager {
                 if (row.lineNm === "9호선") branch = "9호선";
                 if (lineKeyVal === "경의중앙선") branch = "경의중앙선";
 
-                // SPECIAL: Line 6 is a loop, so we treat it as single direction effectively for visualization/linking
+
+                // Line 6 is a loop, so we treat it as single direction effectively for visualization/linking
                 let direction = row.upbdnbSe;
                 if (row.lineNm === "6호선") direction = "상행";
 
@@ -170,8 +160,6 @@ export class DataManager {
 
             const train = this.trains.get(key);
 
-            // Avoid adding duplicates (same station, same time)
-            // Actually, we process row by row, let's just push and sort later
             if (row.trainArvlTm || row.trainDptreTm) {
                 train.schedule.push({
                     station: row.stnNm,
@@ -198,13 +186,7 @@ export class DataManager {
                 return !(s.station === prev.station && s.sortTime === prev.sortTime);
             });
 
-            // Filter out schedule based on Origin/Dest range? 
-            // The CSV contains the full route usually, but sometimes fragments.
-            // We want the part where the train is actually running logic.
-            // For now, assume CSV rows are valid stops.
-
-            // Trim schedule to start from 'origin' and end at 'dest'?
-            // Warning: Loop lines might differ.
+            // Trim schedule to start from 'origin' and end at 'dest'
             const startIdx = train.schedule.findIndex(s => s.station === train.origin);
             const endIdx = train.schedule.findLastIndex(s => s.station === train.dest);
 
@@ -219,12 +201,7 @@ export class DataManager {
                 }
             }
 
-            // 4. Fill gaps if needed? (fill_missing_times.py handled basic gaps)
-            // But we ensure transit integrity:
-            // Ensure each stop has Dep and Arr properly handled in calculatePosition
-
-            // SPECIAL FIX: Merge consecutive duplicate stations (e.g. Eungam Arrival + Eungam Departure separate entries)
-            // This happens when we concatenate schedules.
+            // Merge consecutive duplicate stations (e.g. Eungam Arrival + Eungam Departure separate entries)
             for (let i = 0; i < train.schedule.length - 1; i++) {
                 const curr = train.schedule[i];
                 const next = train.schedule[i + 1];
@@ -234,23 +211,10 @@ export class DataManager {
                     // If curr has no arrival, it keeps it (likely start of line).
                     // If next has no departure, it keeps it (likely end of line).
 
-                    // Logic: 
-                    // New Arrival = curr.arrival ?? next.arrival
-                    // New Departure = next.departure ?? curr.departure
-                    // New ArrivalSeconds = curr.arrivalSeconds ?? next.arrivalSeconds
-                    // New DepartureSeconds = next.departureSeconds ?? curr.departureSeconds
-
-                    if (!curr.arrivalSeconds && next.arrivalSeconds) {
-                        curr.arrival = next.arrival;
-                        curr.arrivalSeconds = next.arrivalSeconds;
-                    }
                     if (!next.departureSeconds && curr.departureSeconds) {
                         next.departure = curr.departure;
                         next.departureSeconds = curr.departureSeconds;
                     }
-
-                    // Prefer effectively: Arr from Cur, Dep from Next.
-                    // But if Cur is missing Arr, allow Next's Arr? (Though usually Cur is the Arrival entry)
 
                     // Construct merged node
                     const merged = {
@@ -267,12 +231,6 @@ export class DataManager {
             }
 
             // Split trains if there is a massive time gap (> 20 mins)
-            // This handles cases where a train number is reused (e.g. Morning run ... big gap ... Night run)
-            // Or wrap-around midnight data (23:00 ... 00:30 next day treated as same train).
-            // We check this AFTER merging duplicates but BEFORE final debug/usage.
-
-            // Limit to Line 1 or generic? Generic seems safe if gap is HUGE.
-            // But let's stick to Line 1 first as requested.
             if (train.line === "1호선" || train.line === "Line1") {
                 for (let i = 0; i < train.schedule.length - 1; i++) {
                     const curr = train.schedule[i];
@@ -302,8 +260,6 @@ export class DataManager {
                 }
             }
 
-            // DEBUG: Check for teleportation (huge time gaps > 20 mins between stops)
-            // Re-enabled per user request
             if (train.line === "1호선" || train.line === "Line1" || train.uniqueId.includes("1호선")) {
                 for (let i = 0; i < train.schedule.length - 1; i++) {
                     const curr = train.schedule[i];
@@ -313,16 +269,6 @@ export class DataManager {
                         console.warn(`[Suspicious Gap] Train ${train.uniqueId} (${train.id}): ${curr.station}(${curr.departure || curr.arrival}) -> ${next.station}(${next.arrival || next.departure}) takes ${Math.floor(diff / 60)} mins`);
                     }
                 }
-            }
-
-            if (train.id === "6013" || train.uniqueId.includes("6013")) {
-                console.log(`[Debug 6013] Schedule length: ${train.schedule.length}`);
-                console.log(`[Debug 6013] Origin: ${train.origin}, Dest: ${train.dest}`);
-                console.log(`[Debug 6013] First: ${train.schedule[0].station} (${train.schedule[0].sortTime})`);
-                console.log(`[Debug 6013] Last: ${train.schedule[train.schedule.length - 1].sortTime})`);
-                // Check middle around Eungam
-                const eungams = train.schedule.filter(s => s.station === "응암");
-                eungams.forEach((s, i) => console.log(`[Debug 6013] Eungam ${i}: Arr ${s.arrival} Dep ${s.departure} Sort ${s.sortTime}`));
             }
         });
     }

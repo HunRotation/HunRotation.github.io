@@ -37,9 +37,7 @@ export class SoundManager {
         }
     }
 
-    // Helper: Get Frequency for (Octave, ScaleIndex)
     getLydianFreq(octave, index) {
-        // Handle index overflow/underflow
         while (index >= 7) {
             index -= 7;
             octave++;
@@ -50,12 +48,6 @@ export class SoundManager {
         }
 
         const semitoneOffset = this.lydianIntervals[index];
-        // Dist from A4 (440). C4 is -9 semitones from A4.
-        // Freq = 440 * 2^((n)/12)
-        // C4 relative to A4: -9
-        // Note relative to C4: +semitoneOffset
-        // Octave relative to 4: + (octave - 4) * 12
-
         const totalSemitones = -9 + semitoneOffset + (octave - 4) * 12;
         return 440 * Math.pow(2, totalSemitones / 12);
     }
@@ -78,16 +70,12 @@ export class SoundManager {
             }
         }
 
-        // Apply Step (Max 8 loop logic handled by caller, but we handle safe Scale Index)
-        // Step 0 = Original
         let targetOct = base.oct;
         let targetNote = base.note + pitchStep;
 
         let freq = this.getLydianFreq(targetOct, targetNote);
 
-        // Correction for Line 8 Instrument (PercFlut transposes +7st, so we shift -7st)
         if (line.includes("8호선")) {
-            // Shift freq down by 7 semitones (Perfect 5th)
             freq = freq * Math.pow(2, -7 / 12);
         }
 
@@ -127,13 +115,7 @@ export class SoundManager {
             type = "voc";
         }
 
-        // Match fallback (this block is now redundant due to the final else above)
-        // if (patchBody === "") {
-        //     console.warn("No instrument matched for line:", line);
-        //     // Default Fallback
-        //     patchBody = `SinOsc osc => ADSR env ${CHAIN_END} 0.2 => osc.gain; env.set(10::ms, 50::ms, 0.5, 100::ms); ${freq} => osc.freq;`;
-        //     type = "env";
-        // }
+
 
         // Trigger Logic
         let triggerCode = "";
@@ -145,11 +127,9 @@ export class SoundManager {
 
         let finalCode = patchBody + triggerCode;
 
-        // Wrap in curly braces to ensure local scope (prevent variable redefinition errors)
         finalCode = `{\n${finalCode}\n}`;
 
-        // Final debug log
-        console.log(`[Sound] Line: ${line}, Freq: ${freq}, Type: ${type}`);
+
 
         return finalCode;
     }
@@ -157,11 +137,7 @@ export class SoundManager {
     async playTone(line, isExpress = false, pitchStep = 0) {
         if (!this.isReady || !this.chuck) return;
 
-        // Debug
-        // if (line.includes("경의중앙선")) console.log("Playing Gyeongui Sound...");
-
         const code = this.getPatchCode(line, isExpress, pitchStep);
-        if (line.includes("경의") && code) console.log("Gyeongui Code:", code);
 
         if (code) {
             this.chuck.runCode(code).catch(e => console.error("WebChucK Run Error:", e));
