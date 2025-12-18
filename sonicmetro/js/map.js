@@ -1,4 +1,4 @@
-import { Line1_Gyeongwon, Line1_Gyeongin, Line1_GyeongbuJanghang, Line2_Stations, Line2_Seongsu_Branch, Line2_Sinjeong_Branch, Line3_Stations, Line4_Stations, Line5_Hanam_Main, Line5_Macheon_Branch, Line6_Stations, Line6_Loop, Line7_Stations, Line8_Stations, Line9_Stations } from './stations.js?v=24';
+import { Line1_Gyeongwon, Line1_Gyeongin, Line1_GyeongbuJanghang, Line2_Stations, Line2_Seongsu_Branch, Line2_Sinjeong_Branch, Line3_Stations, Line4_Stations, Line5_Hanam_Main, Line5_Macheon_Branch, Line6_Stations, Line6_Loop, Line7_Stations, Line8_Stations, Line9_Stations, Line_GyeonguiJungang, Line_Gyeongui_Seoul } from './stations.js?v=26';
 
 export class SubwayMap {
     constructor(containerId, imageUrl) {
@@ -23,7 +23,9 @@ export class SubwayMap {
             line6_loop: Line6_Loop || [],
             line7: Line7_Stations || [],
             line8: Line8_Stations || [],
-            line9: Line9_Stations || []
+            line9: Line9_Stations || [],
+            gyeongui: Line_GyeonguiJungang || [],
+            gyeongui_seoul: Line_Gyeongui_Seoul || []
         };
 
         // Processed stations will be stored here
@@ -34,6 +36,14 @@ export class SubwayMap {
         this.enabledStations = new Set(); // Start with no stations enabled
         this.disabledLines = new Set(); // Lines disabled
         this.lastToggleTime = 0;
+        this.debug = false; // Debug Mode Flag
+    }
+
+    setDebug(enabled) {
+        this.debug = enabled;
+        const log = document.getElementById('debug-log');
+        if (log) log.style.display = enabled ? 'block' : 'none';
+        console.log(`Debug Mode: ${enabled ? 'ON' : 'OFF'}`);
     }
 
     // Helper to get natural dimensions
@@ -106,6 +116,9 @@ export class SubwayMap {
             // 8. Initial UI Render
             this.renderActiveStationsList();
 
+            // 9. Sync Debug UI
+            this.setDebug(this.debug);
+
         } catch (err) {
             console.error("Failed to initialize map:", err);
             this.container.innerHTML = `<div style="color:red; p:20px;">Map Error: ${err.message}</div>`;
@@ -142,8 +155,10 @@ export class SubwayMap {
         const l7 = process(Line7_Stations || [], "7호선");
         const l8 = process(Line8_Stations || [], "8호선");
         const l9 = process(Line9_Stations || [], "9호선");
+        const gj = process(Line_GyeonguiJungang || [], "경의중앙선");
+        const gj_s = process(Line_Gyeongui_Seoul || [], "경의중앙선");
 
-        this.allStations = [...l1_gw, ...l1_gi, ...l1_gb, ...l2_m, ...l2_s, ...l2_si, ...l3, ...l4, ...l5_m, ...l5_b, ...l6_m, ...l6_l, ...l7, ...l8, ...l9];
+        this.allStations = [...l1_gw, ...l1_gi, ...l1_gb, ...l2_m, ...l2_s, ...l2_si, ...l3, ...l4, ...l5_m, ...l5_b, ...l6_m, ...l6_l, ...l7, ...l8, ...l9, ...gj, ...gj_s];
 
         // Build efficient map: "StationName" -> { "1호선": coords, "3호선": coords }
         this.stationMap = new Map();
@@ -174,7 +189,30 @@ export class SubwayMap {
         // Initial Transform
         this.svg.call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(scale));
 
-        // Debug Click listener removed per user request
+        // Debug Click listener
+        this.svg.on("click", (e) => {
+            if (!this.debug) return;
+
+            const [x, y] = d3.pointer(e, this.g.node());
+            const unscaledX = Math.round(x / this.scaleFactor);
+            const unscaledY = Math.round(y / this.scaleFactor);
+            const logStr = `{ name: "Station", x: ${unscaledX}, y: ${unscaledY} },\n`;
+            console.log(logStr.trim());
+
+            const debugLog = document.getElementById('debug-log');
+            if (debugLog) {
+                debugLog.value += logStr;
+                debugLog.scrollTop = debugLog.scrollHeight;
+            }
+
+            this.g.append("circle")
+                .attr("cx", x)
+                .attr("cy", y)
+                .attr("r", 5 * this.scaleFactor)
+                .attr("fill", "red")
+                .attr("stroke", "white")
+                .attr("stroke-width", 2);
+        });
     }
 
     toggleStation(name) {
@@ -204,7 +242,7 @@ export class SubwayMap {
 
         // Group by Line
         const groups = {};
-        const linesOrder = ["1호선", "2호선", "3호선", "4호선", "5호선", "6호선", "7호선", "8호선", "9호선"];
+        const linesOrder = ["1호선", "2호선", "3호선", "4호선", "5호선", "6호선", "7호선", "8호선", "9호선", "경의중앙선"];
 
         // Iterate all active stations
         // We need to iterate ALL stations to find which lines the enabled names belong to
@@ -222,12 +260,16 @@ export class SubwayMap {
         linesOrder.forEach(line => {
             if (groups[line] && groups[line].length > 0) {
                 const color = this.getLineColor(line);
+                const isDisabled = this.disabledLines.has(line);
+                const finalColor = isDisabled ? "#999" : color;
+                const statusText = isDisabled ? " (disabled)" : "";
                 const stationsStr = groups[line].join(', ');
+
                 html += `
                     <div class="line-group">
-                        <div class="line-header">
-                            <span class="line-color-dot" style="background: ${color}"></span>
-                            ${line}
+                        <div class="line-header" style="color: ${finalColor}">
+                            <span class="line-color-dot" style="background: ${finalColor}"></span>
+                            ${line}${statusText}
                         </div>
                         <div class="station-items">${stationsStr}</div>
                     </div>
@@ -252,6 +294,7 @@ export class SubwayMap {
         if (line.includes("7호선")) return "#747F00";
         if (line.includes("8호선")) return "#E6186C";
         if (line.includes("9호선")) return "#BDB092";
+        if (line.includes("경의중앙선")) return "#77C4A3";
         return "#999";
     }
 
@@ -270,9 +313,16 @@ export class SubwayMap {
         }
         // Re-render everything affected
         this.renderConnections();
+        this.renderActiveStationsList(); // Update panel to show disabled status
         this.renderTrains([]); // Temporary clear or just let next frame handle it?
         // Actually, main loop handles train rendering. We just need connections update.
         // We should trigger a re-render of trains next frame.
+    }
+
+    resetStations() {
+        this.enabledStations.clear();
+        this.renderStations(this.allStations);
+        this.renderActiveStationsList();
     }
 
     // Ripple Effect
@@ -295,7 +345,7 @@ export class SubwayMap {
 
     renderStations(stations) {
         // Dynamic styling based on scale
-        const R = 3 * this.scaleFactor;
+        const R = 5 * this.scaleFactor; // Increased from 3 to 5 per user request
         const R_SEL = 6 * this.scaleFactor; // Bigger for enabled
         const STROKE = 1.5 * this.scaleFactor;
 
@@ -350,7 +400,7 @@ export class SubwayMap {
             .attr("stroke-width", Math.max(STROKE, 1))
             .style("cursor", "pointer")
             .on("click", (e, d) => {
-                e.stopPropagation(); // Prevent map debug click
+                if (!this.debug) e.stopPropagation(); // Stop propagation if NOT in debug mode (allow bubbling in debug)
                 this.toggleStation(d.name);
             });
     }
@@ -398,7 +448,7 @@ export class SubwayMap {
                 .attr("d", line)
                 .style("cursor", "pointer")
                 .on("click", (e) => {
-                    e.stopPropagation();
+                    if (!this.debug) e.stopPropagation();
                     console.log("Clicked Line:", lineKey);
                     this.toggleLine(lineKey);
                 });
@@ -464,6 +514,14 @@ export class SubwayMap {
 
         // Line 9
         drawPath(this.branches.line9, "line-9", "#BDB092");
+
+        // Gyeongui-Jungang
+        drawPath(this.branches.gyeongui, "line-gyeongui", "#77C4A3");
+        // Branch (Seoul Station)
+        const gajwa = this.branches.gyeongui.find(s => s.name === "가좌");
+        if (gajwa && this.branches.gyeongui_seoul.length > 0) {
+            drawPath([gajwa, ...this.branches.gyeongui_seoul], "line-gyeongui-seoul", "#77C4A3");
+        }
     }
 
     renderTrains(activeTrains) {
@@ -501,6 +559,7 @@ export class SubwayMap {
         if (train.line === "7호선" || train.branch === "7호선" || (train.branch && train.branch.includes("7호선"))) return "#747F00";
         if (train.line === "8호선" || train.branch === "8호선" || (train.branch && train.branch.includes("8호선"))) return "#E6186C";
         if (train.line === "9호선" || train.branch === "9호선" || (train.branch && train.branch.includes("9호선"))) return "#BDB092";
+        if (train.line === "경의중앙선" || train.branch === "경의중앙선") return "#77C4A3";
 
         return "#0052A4";
     }
@@ -519,12 +578,40 @@ export class SubwayMap {
         if (!entry) return null;
 
         // If line is provided, try to get specific coords
-        if (line && entry[line]) {
-            return entry[line];
+        if (line) {
+            // 1. Unambiguous Exact Match (Fastest)
+            if (entry[line]) return entry[line];
+
+            // 2. Partial Match (e.g. "경의중앙선" vs "line-gyeongui" or "1호선" vs "line-gyeongin")
+            // We need to match the key stored in stationMap (which are normalized line names)
+            // with the `line` arg which might come from data (e.g. "1호선") or class (e.g. "line-1").
+
+            // Iterate keys to find partial match
+            for (const key of Object.keys(entry)) {
+                if (line.includes(key) || key.includes(line)) {
+                    return entry[key];
+                }
+            }
         }
 
-        // Fallback: Return first available (Object.values(entry)[0])
-        // This handles cases where line might be slightly different or missing
+        // Fallback: If no line provided or no match found (e.g. Transfer station with one shared node?)
+        // For distinct stations like Yangpyeong, we MUST preserve distinction.
+        // If line was provided but not found, returning values[0] is RISKY if names collide.
+        // BUT for interchange stations (e.g. Seoul Station), usually just one dot is fine/shared.
+        // For Yangpyeong, they are far apart.
+
+        // Strategy: 
+        // If the station name has multiple entries (collision), AND we failed to match the line:
+        // defaulting to index 0 is bad.
+        // However, standard transfers usually share coords (or are close).
+        // Let's rely on the caller passing correct line.
+
+        /*
+        if (name === "양평") {
+             console.warn(`Station Collision '양평': Requested Line '${line}'. Found keys:`, Object.keys(entry));
+        }
+        */
+
         const values = Object.values(entry);
         return values.length > 0 ? values[0] : null;
     }

@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log("SonicMetro Initializing...");
 
     const map = new SubwayMap('map-container', IMAGE_URL);
+    window.mapInstance = map; // Expose for Debugging
     const dataManager = new DataManager();
     const soundManager = new SoundManager();
 
@@ -64,6 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         isPlaying = false;
         updateTimeRange(); // Resets to min
         map.renderTrains([]);
+        map.resetStations(); // Clear enabled stations
         nextEventIndex = 0; // Reset events
         trainStates.clear(); // Reset pitch states
     });
@@ -110,6 +112,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!isPlaying) {
             renderFrame(simulationTime);
         }
+    });
+
+    // Sound Test Panel Listeners
+    document.querySelectorAll('.test-dot').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const line = btn.getAttribute('data-line');
+            if (line) {
+                console.log("Testing Sound for:", line);
+                if (soundManager.isReady) {
+                    soundManager.playTone(line, false, 0);
+                }
+            }
+        });
     });
 
     // Initialize Map
@@ -270,6 +285,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const maxTime = parseFloat(timeSlider.max) || 86400;
                 if (simulationTime >= maxTime) {
                     simulationTime = parseFloat(timeSlider.min) || 0;
+                    // Reset Event Index for Loop
+                    nextEventIndex = arrivalEvents.findIndex(ev => ev.time >= simulationTime);
+                    if (nextEventIndex === -1) nextEventIndex = 0;
                 }
 
                 updateClock();

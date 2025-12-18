@@ -40,7 +40,11 @@ export class DataManager {
             "data/9호선_상행_평일.csv",
             "data/9호선_하행_평일.csv",
             "data/9호선_상행_주말.csv",
-            "data/9호선_하행_주말.csv"
+            "data/9호선_하행_주말.csv",
+            "data/경의중앙선_상행_평일.csv",
+            "data/경의중앙선_하행_평일.csv",
+            "data/경의중앙선_상행_주말.csv",
+            "data/경의중앙선_하행_주말.csv"
         ];
 
         try {
@@ -126,7 +130,11 @@ export class DataManager {
             if (!id) return;
 
             // composite key to separate Weekday/Weekend AND Line (to avoid 2호선 vs 5호선 collision)
-            const key = `${id}_${row.wkndSe}_${row.lineNm}`;
+            // composite key to separate Weekday/Weekend AND Line (to avoid 2호선 vs 5호선 collision)
+            let lineKeyVal = row.lineNm;
+            if (lineKeyVal === "경의선" || lineKeyVal === "중앙선") lineKeyVal = "경의중앙선";
+
+            const key = `${id}_${row.wkndSe}_${lineKeyVal}`;
 
             if (!this.trains.has(key)) {
                 let branch = row.brlnNm;
@@ -140,6 +148,7 @@ export class DataManager {
                 if (row.lineNm === "7호선") branch = "7호선";
                 if (row.lineNm === "8호선") branch = "8호선";
                 if (row.lineNm === "9호선") branch = "9호선";
+                if (lineKeyVal === "경의중앙선") branch = "경의중앙선";
 
                 // SPECIAL: Line 6 is a loop, so we treat it as single direction effectively for visualization/linking
                 let direction = row.upbdnbSe;
@@ -148,7 +157,7 @@ export class DataManager {
                 this.trains.set(key, {
                     id: id,
                     uniqueId: key,
-                    line: row.lineNm,
+                    line: lineKeyVal, // Use normalized line name (e.g. "경의중앙선")
                     branch: branch,
                     direction: direction,
                     dayType: row.wkndSe,
