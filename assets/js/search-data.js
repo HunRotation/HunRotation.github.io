@@ -41,6 +41,11 @@ ninja.data = [{
           description: "Gyehun Go, Satbyul Han, Ahyeon Choi, Eunjin Choi, Juhan Nam and Jeong Mi Park",
           section: "Projects",handler: () => {
               window.location.href = "/projects/aimoclips.html";
+            },},{id: "projects-sonicmetro",
+          title: 'SonicMetro:',
+          description: "Gyehun Go",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/sonicmetro.html";
             },},{
         id: 'social-address',
         title: 'Address',
