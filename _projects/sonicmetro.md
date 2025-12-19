@@ -106,7 +106,9 @@ input:checked + .slider:before {
 Even today, countless trains on the Seoul metropolitan subway carry people to their destinations along the tracks. And they repeat the cycle of stopping at designated stations at designated times (probably...) according to the timetable and departing again. There are currently 24 such lines where trains run in the Seoul metropolitan area, and hundreds of trains move on them in their own orderly patterns. However, there are too many trains and stations to see that pattern at a glance, and the subway map is too complex to grasp it all. So, what if we could *listen* to this pattern instead of just seeing it?
 
 My project **SonicMetro** started from this idea. What if sound was generated every time a train stopped at a station, and those sounds came together? It might sound like noise at first, but since there is a beautiful pattern in the movement of trains, those noise-like sounds might come together to create beautiful music. The music created in this way will convey the beautiful patterns created by the trains through a different sense.
+
 ---
+
 # How It Works
 
 ## Train Schedule
@@ -120,7 +122,9 @@ The coordinates of each station were extracted from the [Metropolitan Subway Map
 ## Sound Production
 
 All sounds produced when a train stops at a station are implemented with [WebChucK](https://chuck.cs.princeton.edu/webchuck/). WebChucK is a programming language that ports ChucK code to JavaScript, allowing you to freely synthesize and play desired sounds.
+
 ---
+
 # How To Use
 
 <img src="/assets/img/sonicmetro/sonicmetro_tutorial.jpeg" style="width: 100%;">
@@ -142,7 +146,9 @@ All sounds produced when a train stops at a station are implemented with [WebChu
    - Reset: Resets the simulation time and all enabled stations.
    - Export: A button to download a .json file containing timetables for all trains.
 8. A slider to control the speed of the simulation. It can be adjusted between 0.1x - 10x, and at the default speed of 1x, 1 minute in the simulation is played during 1 real-world second.
+
 ---
+
 # Future Direction
 Currently, **SonicMetro** has implemented a total of 10 lines: 1-9호선 and 경의중앙선. This project will continue to be updated until all Seoul metropolitan subway lines are implemented, and the official version will be released when all lines are implemented.
 
@@ -152,7 +158,9 @@ In addition, I plan to supplement and add the following:
 - I plan to add a function to customize the sounds assigned to each line.
 
 If you find any bugs or points for improvement while using this project, please feel free to report them to rotation@kaist.ac.kr!
+
 ---
+
 # Demo
 
 
@@ -166,7 +174,9 @@ If you find any bugs or points for improvement while using this project, please 
 오늘도 수도권 전철 위에서는 철로 선을 따라 수많은 열차들이 사람들을 원하는 곳으로 데려다 줍니다. 그리고 이들은 시간표를 따라 (아마도...) 정해진 때에 정해진 역에 멈추고 다시 출발하기를 반복하죠. 이렇게 기차가 다니는 선만 현재 수도권에 24개가 있고, 그 위에 수백 대의 열차가 나름 질서정연한 패턴을 보이며 움직입니다. 하지만 그 패턴을 한 눈에 들여다 보기에 열차와 역은 너무 많고, 지하철 노선도는 너무 복잡합니다. 그렇다면, 이 패턴을 눈으로 보는 게 아니라 귀로 들으면 어떨까요?
 
 저의 프로젝트 **SonicMetro**는 이 아이디어에서 시작한 프로젝트입니다. 열차가 역에 설 때마다 소리를 내고, 그 소리가 한데 모이면 어떨까요? 자칫 소음처럼 들릴지도 모르지만, 기차의 움직임에는 아름다운 패턴이 있기에 그 소음 같은 것들이 모이면서 질서를 갖춘 음악을 자아낼지도 모릅니다. 이렇게 만들어진 음악이, 기차들이 모아 만든 아름다운 패턴을 색다른 감각으로 전달할 것입니다.
+
 ---
+
 # How It Works
 
 ## Train Schedule
@@ -180,6 +190,7 @@ If you find any bugs or points for improvement while using this project, please 
 ## Sound Production
 
 열차가 역에 정차할 때 나는 모든 음성은 [WebChucK](https://chuck.cs.princeton.edu/webchuck/)으로 구현됩니다. WebChucK은 JavaScript 상에 ChucK 코드를 이식하여, 원하는 음성을 자유롭게 합성하여 재생할 수 있는 프로그래밍 언어입니다.
+
 ---
 
 
@@ -204,7 +215,9 @@ If you find any bugs or points for improvement while using this project, please 
    - Reset: 시뮬레이션 시각 및 모든 활성화된 역이 초기화됩니다.
    - Export: 모든 열차별 시간표가 포함된 .json 파일을 다운로드할 수 있는 버튼입니다.
 8. 시뮬레이션의 속도를 조절할 수 있는 슬라이더입니다. 0.1x - 10x 사이로 조절할 수 있으며, 기본 속도인 1x의 경우 현실의 1초 동안 시뮬레이션상의 1분이 재생됩니다.
+
 ---
+
 # Future Direction
 현재 **SonicMetro**에 구현된 선은 수도권 1-9호선 및 경의·중앙선으로 총 10개입니다. 이 프로젝트는 수도권의 모든 전철 노선이 구현될 때까지 계속 업데이트될 것이며, 모든 노선이 구현되었을 때 비로소 정식 버전이 공개될 예정입니다.
 
@@ -214,7 +227,9 @@ If you find any bugs or points for improvement while using this project, please 
 - 각 호선에 배정된 음을 커스터마이징하는 기능을 추가할 예정입니다.
 
 이외에 이 프로젝트를 이용하시면서 발견하신 버그나 개선할 만한 점은 언제든 rotation@kaist.ac.kr로 제보 부탁드립니다!
+
 ---
+
 # Demo
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/PR7BaGUhWjc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 100%; aspect-ratio: 16/9;"></iframe>
