@@ -121,7 +121,11 @@ export class SoundManager {
         let triggerCode = "";
         if (type === "env") {
             triggerCode = `env.keyOn(); ${DURATION_ON} => now; env.keyOff(); ${DURATION_OFF} => now;`;
-        } else {
+        } 
+        else if (line.includes("경의")) {
+            triggerCode = `1 => voc.noteOn; ${DURATION_ON} * 2 => now; 1 => voc.noteOff; ${DURATION_OFF} * 2 => now;`;
+        }
+        else {
             triggerCode = `1 => voc.noteOn; ${DURATION_ON} => now; 1 => voc.noteOff; ${DURATION_OFF} => now;`;
         }
 
