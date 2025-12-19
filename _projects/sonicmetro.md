@@ -100,7 +100,7 @@ input:checked + .slider:before {
 </div>
 
 
-<div id="eng-content">
+<div id="eng-content" markdown="1">
 
 ## Background
 Even today, countless trains on the Seoul metropolitan subway carry people to their destinations along the tracks. And they repeat the cycle of stopping at designated stations at designated times (probably...) according to the timetable and departing again. There are currently 24 such lines where trains run in the Seoul metropolitan area, and hundreds of trains move on them in their own orderly patterns. However, there are too many trains and stations to see that pattern at a glance, and the subway map is too complex to grasp it all. So, what if we could *listen* to this pattern instead of just seeing it?
@@ -155,7 +155,7 @@ If you find any bugs or points for improvement while using this project, please 
 
 </div>
 
-<div id="kor-content" style="display: none;">
+<div id="kor-content" style="display: none;" markdown="1">
 
 ## Background
 오늘도 수도권 전철 위에서는 철로 선을 따라 수많은 열차들이 사람들을 원하는 곳으로 데려다 줍니다. 그리고 이들은 시간표를 따라 (아마도...) 정해진 때에 정해진 역에 멈추고 다시 출발하기를 반복하죠. 이렇게 기차가 다니는 선만 현재 수도권에 24개가 있고, 그 위에 수백 대의 열차가 나름 질서정연한 패턴을 보이며 움직입니다. 하지만 그 패턴을 한 눈에 들여다 보기에 열차와 역은 너무 많고, 지하철 노선도는 너무 복잡합니다. 그렇다면, 이 패턴을 눈으로 보는 게 아니라 귀로 들으면 어떨까요?
