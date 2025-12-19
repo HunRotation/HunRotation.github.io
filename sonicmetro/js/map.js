@@ -377,6 +377,7 @@ export class SubwayMap {
             if (className.includes("line-7")) lineKey = "7호선";
             if (className.includes("line-8")) lineKey = "8호선";
             if (className.includes("line-9")) lineKey = "9호선";
+            if (className.includes("line-gyeongui")) lineKey = "경의중앙선";
 
             const isGray = this.disabledLines.has(lineKey);
             const finalColor = isGray ? "#CCCCCC" : (color || "#0052A4");
