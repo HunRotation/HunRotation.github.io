@@ -71,13 +71,6 @@
       "startDate": "2023-01-01",
       "endDate": "2023-06-30",
       "url": "https://hcil.snu.ac.kr/"
-    },
-    {
-      "name": "International Research Institute for Cyber Security",
-      "summary": "Research Intern",
-      "highlights": ["Evaluated a novel lattice-based signature scheme submitted to the Korean Post-Quantum Competition"],
-      "startDate": "2022-07-01",
-      "endDate": "2022-09-30"
     }
   ],
   "additional experience": [
