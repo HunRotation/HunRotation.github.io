@@ -15,9 +15,9 @@ footer_text: >
 keywords: jekyll, jekyll-theme, academic-website, portfolio-website # add your own keywords or leave empty
 research_interests: # add your research interests for the about page
   - Music Understanding
-  - Music Perception
-  - Large Language Models
-  - Deep Learning
+  - Cross-Cultural Music Modeling
+  - Audio Language Models
+  - Computational Music Perception
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: hunrotation_icon.png # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
