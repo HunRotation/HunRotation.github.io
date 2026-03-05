@@ -92,12 +92,11 @@
       "endDate": "2024-06-30"
     }
   ],
-  "awards": [
+  "scholarship": [
     {
-      "title": "Best Poster Award",
-      "date": "2025-02",
-      "awarder": "Korean Society for Music Perception and Cognition (KSMPC)",
-      "summary": "Title: Can Emotion Concepts be Reflected Well in Text-to-Music Generation Models?"
+      "title": "Sinyang Cultural Foundation Scholarship",
+      "date": "2024-08",
+      "awarder": "Sinyang Cultural Foundation"
     },
     {
       "title": "Seoul National University Semiconductor Specialization School Semiconductor Track Program",
@@ -164,8 +163,8 @@
     {
       "name": "UMATO: Uniform Manifold Approximation with Two-phase Optimization for Scalable and Accurate Data Visualization",
       "publisher": "IEEE Transactions on Visualization and Computer Graphics (TVCG)",
-      "releaseDate": "2025-08",
-      "authors": ["Hyeon Jeon", "Kwon Ko", "Soohyun Lee", "Jake Hyun", "Taehyun Yang", "Gyehun Go", "Jaemin Go", "Jinwook Seo"],
+      "releaseDate": "2025-12",
+      "authors": ["Hyeon Jeon", "Kwon Ko", "Soohyun Lee", "Jake Hyun", "Taehyun Yang", "Gyehun Go", "Jaemin Jo", "Jinwook Seo"],
       "url": "https://doi.org/10.1109/TVCG.2025.3602735",
       "summary": "",
       "paper": "https://www.computer.org/csdl/journal/tg/5555/01/11141505/29tkockJLEY",
