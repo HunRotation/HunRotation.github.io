@@ -1,4 +1,4 @@
-import { SubwayMap } from './map.js?v=29';
+import { SubwayMap } from './map.js?v=33';
 import { DataManager } from './data.js?v=30';
 import { SoundManager } from './sound.js?v=1';
 
@@ -151,6 +151,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (train.dayType !== currentDayType) continue; // Filter by day
             if (!train.schedule) continue;
             train.schedule.forEach(stop => {
+                // Pass-throughs (arr == dep, both set) are waypoints, not stops —
+                // exclude them from sound/ripple events but keep in schedule for the path.
+                if (stop.arrivalSeconds && stop.departureSeconds &&
+                    stop.arrivalSeconds === stop.departureSeconds) {
+                    return;
+                }
                 if (stop.arrivalSeconds) {
                     events.push({
                         time: stop.arrivalSeconds, // Use numeric seconds!

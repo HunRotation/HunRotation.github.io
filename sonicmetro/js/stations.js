@@ -107,6 +107,15 @@ export const Line1_GyeongbuJanghang = [
     { name: "신창", x: 204, y: 1981 },
 ];
 
+// Single-station branches off Line1_GyeongbuJanghang
+export const Line1_Gwangmyeong_Branch = [
+    { name: "광명", x: 582, y: 1468 },
+];
+
+export const Line1_Seodongtan_Branch = [
+    { name: "서동탄", x: 969, y: 1896 },
+];
+
 export const Line3_Stations = [
     { name: "대화", x: 229, y: 370 },
     { name: "주엽", x: 253, y: 395 },

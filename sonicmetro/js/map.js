@@ -1,4 +1,4 @@
-import { Line1_Gyeongwon, Line1_Gyeongin, Line1_GyeongbuJanghang, Line2_Stations, Line2_Seongsu_Branch, Line2_Sinjeong_Branch, Line3_Stations, Line4_Stations, Line5_Hanam_Main, Line5_Macheon_Branch, Line6_Stations, Line6_Loop, Line7_Stations, Line8_Stations, Line9_Stations, Line_GyeonguiJungang, Line_Gyeongui_Seoul } from './stations.js?v=26';
+import { Line1_Gyeongwon, Line1_Gyeongin, Line1_GyeongbuJanghang, Line1_Gwangmyeong_Branch, Line1_Seodongtan_Branch, Line2_Stations, Line2_Seongsu_Branch, Line2_Sinjeong_Branch, Line3_Stations, Line4_Stations, Line5_Hanam_Main, Line5_Macheon_Branch, Line6_Stations, Line6_Loop, Line7_Stations, Line8_Stations, Line9_Stations, Line_GyeonguiJungang, Line_Gyeongui_Seoul } from './stations.js?v=28';
 
 export class SubwayMap {
     constructor(containerId, imageUrl) {
@@ -12,6 +12,8 @@ export class SubwayMap {
             gyeongwon: Line1_Gyeongwon,
             gyeongin: Line1_Gyeongin,
             gyeongbu: Line1_GyeongbuJanghang,
+            gwangmyeong: Line1_Gwangmyeong_Branch,
+            seodongtan: Line1_Seodongtan_Branch,
             line2_main: Line2_Stations || [],
             line2_seongsu: Line2_Seongsu_Branch || [],
             line2_sinjeong: Line2_Sinjeong_Branch || [],
@@ -36,7 +38,10 @@ export class SubwayMap {
         this.enabledStations = new Set(); // Start with no stations enabled
         this.disabledLines = new Set(); // Lines disabled
         this.lastToggleTime = 0;
-        this.debug = false; // Debug Mode Flag
+        this.debug = false; // Debug Mode Flag — click stations/map to log coords
+
+        // Per-train unwrapped rotation memory so CSS transitions take the short arc
+        this.trainAngles = new Map();
     }
 
     setDebug(enabled) {
@@ -143,6 +148,8 @@ export class SubwayMap {
         const l1_gw = process(Line1_Gyeongwon, "1호선");
         const l1_gi = process(Line1_Gyeongin, "1호선");
         const l1_gb = process(Line1_GyeongbuJanghang, "1호선");
+        const l1_gm = process(Line1_Gwangmyeong_Branch, "1호선");
+        const l1_sdt = process(Line1_Seodongtan_Branch, "1호선");
         const l2_m = process(Line2_Stations || [], "2호선");
         const l2_s = process(Line2_Seongsu_Branch || [], "2호선");
         const l2_si = process(Line2_Sinjeong_Branch || [], "2호선");
@@ -158,7 +165,7 @@ export class SubwayMap {
         const gj = process(Line_GyeonguiJungang || [], "경의중앙선");
         const gj_s = process(Line_Gyeongui_Seoul || [], "경의중앙선");
 
-        this.allStations = [...l1_gw, ...l1_gi, ...l1_gb, ...l2_m, ...l2_s, ...l2_si, ...l3, ...l4, ...l5_m, ...l5_b, ...l6_m, ...l6_l, ...l7, ...l8, ...l9, ...gj, ...gj_s];
+        this.allStations = [...l1_gw, ...l1_gi, ...l1_gb, ...l1_gm, ...l1_sdt, ...l2_m, ...l2_s, ...l2_si, ...l3, ...l4, ...l5_m, ...l5_b, ...l6_m, ...l6_l, ...l7, ...l8, ...l9, ...gj, ...gj_s];
 
         // Build efficient map: "StationName" -> { "1호선": coords, "3호선": coords }
         this.stationMap = new Map();
@@ -414,6 +421,17 @@ export class SubwayMap {
             drawPath([guroRaw, ...this.branches.gyeongbu], "line-gyeongbu", "#0052A4");
         }
 
+        // 광명 shuttle: 금천구청 ↔ 광명
+        const geumcheon = this.branches.gyeongbu.find(s => s.name === "금천구청");
+        if (geumcheon && this.branches.gwangmyeong.length) {
+            drawPath([geumcheon, ...this.branches.gwangmyeong], "line-gwangmyeong", "#0052A4");
+        }
+        // 서동탄 branch: 병점 ↔ 서동탄
+        const byeongjeom = this.branches.gyeongbu.find(s => s.name === "병점");
+        if (byeongjeom && this.branches.seodongtan.length) {
+            drawPath([byeongjeom, ...this.branches.seodongtan], "line-seodongtan", "#0052A4");
+        }
+
         // Line 2
         // Main Loop: Connect start to end to close the loop
         if (this.branches.line2_main.length > 0) {
@@ -476,6 +494,25 @@ export class SubwayMap {
 
     renderTrains(activeTrains) {
         const PENTAGON_SIZE = 6 * this.scaleFactor;
+
+        // Unwrap each train's angle so successive frames differ by ≤180°
+        const liveIds = new Set();
+        for (const t of activeTrains) {
+            liveIds.add(t.trainId);
+            const prev = this.trainAngles.get(t.trainId);
+            let a = t.angle;
+            if (prev !== undefined) {
+                let delta = a - prev;
+                while (delta > 180) delta -= 360;
+                while (delta < -180) delta += 360;
+                a = prev + delta;
+            }
+            t.angle = a;
+            this.trainAngles.set(t.trainId, a);
+        }
+        for (const id of this.trainAngles.keys()) {
+            if (!liveIds.has(id)) this.trainAngles.delete(id);
+        }
 
         const trains = this.layerTrains.selectAll(".train-marker")
             .data(activeTrains, d => d.trainId);
