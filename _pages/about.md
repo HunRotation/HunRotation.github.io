@@ -25,14 +25,12 @@ announcements:
 #  limit: 3 # leave blank to include all the blog posts
 ---
 
-I am a Master's student at KAIST's **[Music and Audio Computing Lab](https://mac.kaist.ac.kr/)**, where I am fortunate to be advised by **Prof. Juhan Nam**. My research is dedicated to bridging the gap between machines and music.
+I am a Master's student at KAIST's **[Music and Audio Computing Lab](https://mac.kaist.ac.kr/)**, where I am fortunate to be advised by **Prof. Juhan Nam**.
 
 I am mainly interested in:
 
-- Developing audio language models that **understand the structural, semantic, and affective content of music**.
+- Improving **large audio language models (LALMs)** to align with the way of human thinking.
 
-- Investigating the integration of **cultural contexts in music** into AI models to enhance personalization.
+- Investigating the role and effectiveness of **reasoning in LALMs** to enhance audio, speech, and music understanding.
 
-- Modeling **perceptual mechanisms of musical emotion** to align machine understanding with human auditory experience.
-
-My ultimate aim is to develop artificial intelligence that 'understands' music in a manner analogous to human perception, enabling systems that can effectively assist people with a wide range of music-related tasks, from composition and analysis to discovery and education.
+- Modeling **personalized perception of music** with LALMs to align machine understanding with human auditory experience.

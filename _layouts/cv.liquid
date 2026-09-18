@@ -103,18 +103,16 @@ layout: default
                   {% include resume/education.liquid %}
                 {% when 'research experience' %}
                   {% include resume/research_experience.liquid %}
-                {% when 'additional experience' %}
-                  {% include resume/additional_experience.liquid %}
-                {% when 'awards' %}
-                  {% include resume/awards.liquid %}
+                {% when 'scholarships' %}
+                  {% include resume/scholarships.liquid %}
                 {% when 'skills' %}
                   {% include resume/skills.liquid %}
                 {% when 'languages' %}
                   {% include resume/languages.liquid %}
-                {% when 'publications' %}
-                  {% include resume/publications.liquid %}
                 {% when 'presentations' %}
                   {% include resume/presentations.liquid %}
+                {% when 'publications' %}
+                  {% include resume/publications.liquid %}
                 {% else %}
 
               {% endcase %}
